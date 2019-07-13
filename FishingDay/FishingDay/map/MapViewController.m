@@ -10,7 +10,7 @@
 
 #import "MapViewController.h"
 
-@interface MapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface MapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate>
 @property(strong, nonatomic) MKMapView *mapView;
 
 @property(strong, nonatomic) CLLocationManager *locationManager;
@@ -86,24 +86,13 @@
 }
 
 - (void)updateMap {
-    CLLocationDegrees latitude = self.currentPosition.latitude;
-    CLLocationDegrees longitude = self.currentPosition.longitude;
-    
-    NSLog(@"update map!");
+    self.mapView.centerCoordinate = self.currentPosition;
 }
 
 #pragma mark - <MKMapViewDelegate>
 
-- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
-//    scroll start
-}
-
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
 //    scroll finished
-}
-
-- (void)mapViewDidChangeVisibleRegion:(MKMapView *)mapView {
-//    on every! scroll
 }
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray<MKAnnotationView *> *)views {
@@ -115,21 +104,18 @@
     return nil;
 }
 
-//- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0);
-//- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0);
-//
-//- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);
-//- (void)mapViewDidStopLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);
-//- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation NS_AVAILABLE(10_9, 4_0);
-//- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error NS_AVAILABLE(10_9, 4_0);
-//
-//- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState
-//   fromOldState:(MKAnnotationViewDragState)oldState NS_AVAILABLE(10_9, 4_0) __TVOS_PROHIBITED;
-//
-//- (void)mapView:(MKMapView *)mapView didChangeUserTrackingMode:(MKUserTrackingMode)mode animated:(BOOL)animated
-//
-//- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 7_0);
-//- (void)mapView:(MKMapView *)mapView didAddOverlayRenderers:(NSArray<MKOverlayRenderer *> *)renderers NS_AVAILABLE(10_9, 7_0);
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+    
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
+    NSLog(@"drag annotation");
+}
+
 
 
 #pragma mark - Touch Handlers
