@@ -7,17 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E0CBE3222DA44DC00DC17FD /* FishListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0CBE3122DA44DC00DC17FD /* FishListViewController.m */; };
+		5E0CBE3522DA452D00DC17FD /* FishTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0CBE3422DA452D00DC17FD /* FishTableViewCell.m */; };
+		5E0CBE3822DA458A00DC17FD /* FishInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0CBE3722DA458A00DC17FD /* FishInfoViewController.m */; };
+		5E380D4122DA589F00F39B51 /* FishModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E380D4022DA589F00F39B51 /* FishModel.m */; };
 		6AB238D322D92D0E00568D89 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238D222D92D0E00568D89 /* AppDelegate.m */; };
 		6AB238DB22D92D0F00568D89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AB238DA22D92D0F00568D89 /* Assets.xcassets */; };
 		6AB238DE22D92D0F00568D89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AB238DC22D92D0F00568D89 /* LaunchScreen.storyboard */; };
 		6AB238E122D92D0F00568D89 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238E022D92D0F00568D89 /* main.m */; };
 		6AB238E922D92FAE00568D89 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238E822D92FAE00568D89 /* MapViewController.m */; };
 		6AB238EC22D92FC600568D89 /* WheatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238EB22D92FC600568D89 /* WheatherViewController.m */; };
-		6AB238EF22D92FDD00568D89 /* FishListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238EE22D92FDD00568D89 /* FishListViewController.m */; };
 		6AB238F222D92FF400568D89 /* MarksListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238F122D92FF400568D89 /* MarksListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E0CBE3022DA44DC00DC17FD /* FishListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FishListViewController.h; sourceTree = "<group>"; };
+		5E0CBE3122DA44DC00DC17FD /* FishListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishListViewController.m; sourceTree = "<group>"; };
+		5E0CBE3322DA452D00DC17FD /* FishTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FishTableViewCell.h; sourceTree = "<group>"; };
+		5E0CBE3422DA452D00DC17FD /* FishTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishTableViewCell.m; sourceTree = "<group>"; };
+		5E0CBE3622DA458A00DC17FD /* FishInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FishInfoViewController.h; sourceTree = "<group>"; };
+		5E0CBE3722DA458A00DC17FD /* FishInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishInfoViewController.m; sourceTree = "<group>"; };
+		5E380D3F22DA589F00F39B51 /* FishModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FishModel.h; sourceTree = "<group>"; };
+		5E380D4022DA589F00F39B51 /* FishModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishModel.m; sourceTree = "<group>"; };
 		6AB238CE22D92D0E00568D89 /* FishingDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishingDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB238D122D92D0E00568D89 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AB238D222D92D0E00568D89 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -29,8 +40,6 @@
 		6AB238E822D92FAE00568D89 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		6AB238EA22D92FC600568D89 /* WheatherViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WheatherViewController.h; sourceTree = "<group>"; };
 		6AB238EB22D92FC600568D89 /* WheatherViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WheatherViewController.m; sourceTree = "<group>"; };
-		6AB238ED22D92FDD00568D89 /* FishListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FishListViewController.h; sourceTree = "<group>"; };
-		6AB238EE22D92FDD00568D89 /* FishListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishListViewController.m; sourceTree = "<group>"; };
 		6AB238F022D92FF400568D89 /* MarksListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarksListViewController.h; sourceTree = "<group>"; };
 		6AB238F122D92FF400568D89 /* MarksListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarksListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,7 +91,6 @@
 		6AB238F322D9305C00568D89 /* wheather */ = {
 			isa = PBXGroup;
 			children = (
-				6AB238EA22D92FC600568D89 /* WheatherViewController.h */,
 				6AB238EB22D92FC600568D89 /* WheatherViewController.m */,
 			);
 			path = wheather;
@@ -92,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				6AB238F022D92FF400568D89 /* MarksListViewController.h */,
+				6AB238EA22D92FC600568D89 /* WheatherViewController.h */,
 				6AB238F122D92FF400568D89 /* MarksListViewController.m */,
 			);
 			path = marks;
@@ -100,8 +109,14 @@
 		6AB238F522D9308A00568D89 /* fishList */ = {
 			isa = PBXGroup;
 			children = (
-				6AB238ED22D92FDD00568D89 /* FishListViewController.h */,
-				6AB238EE22D92FDD00568D89 /* FishListViewController.m */,
+				5E0CBE3022DA44DC00DC17FD /* FishListViewController.h */,
+				5E0CBE3122DA44DC00DC17FD /* FishListViewController.m */,
+				5E0CBE3322DA452D00DC17FD /* FishTableViewCell.h */,
+				5E0CBE3422DA452D00DC17FD /* FishTableViewCell.m */,
+				5E0CBE3622DA458A00DC17FD /* FishInfoViewController.h */,
+				5E0CBE3722DA458A00DC17FD /* FishInfoViewController.m */,
+				5E380D3F22DA589F00F39B51 /* FishModel.h */,
+				5E380D4022DA589F00F39B51 /* FishModel.m */,
 			);
 			path = fishList;
 			sourceTree = "<group>";
@@ -186,10 +201,13 @@
 			files = (
 				6AB238E122D92D0F00568D89 /* main.m in Sources */,
 				6AB238F222D92FF400568D89 /* MarksListViewController.m in Sources */,
+				5E0CBE3822DA458A00DC17FD /* FishInfoViewController.m in Sources */,
 				6AB238D322D92D0E00568D89 /* AppDelegate.m in Sources */,
+				5E0CBE3522DA452D00DC17FD /* FishTableViewCell.m in Sources */,
+				5E0CBE3222DA44DC00DC17FD /* FishListViewController.m in Sources */,
 				6AB238EC22D92FC600568D89 /* WheatherViewController.m in Sources */,
 				6AB238E922D92FAE00568D89 /* MapViewController.m in Sources */,
-				6AB238EF22D92FDD00568D89 /* FishListViewController.m in Sources */,
+				5E380D4122DA589F00F39B51 /* FishModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +342,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BL2QCUUKYP;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FishingDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -341,7 +359,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BL2QCUUKYP;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FishingDay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
