@@ -55,7 +55,7 @@ NSString * const markCellId = @"markCellId";
         NSMutableArray *tempMarks = [NSMutableArray array];
         for (int i = 0; i < 5; i++) {
             Mark *mark = [Mark new];
-            mark.photo = [UIImage imageNamed:@"fish_food"];
+            mark.photo = [UIImage imageNamed:@"noPhoto"];
             mark.title = [NSString stringWithFormat:@"Mark %d", i + 1];
             mark.details = @"aaaaaaaaaaaaaaaaaa";
             [tempMarks addObject:mark];
