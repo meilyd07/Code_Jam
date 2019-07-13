@@ -10,7 +10,8 @@
 #import "MapViewController.h"
 #import "FishListViewController.h"
 #import "MarksListViewController.h"
-#import "WheatherViewController.h"
+#import "WeatherViewController.h"
+#import "WeatherViewModel.h"
 
 @interface AppDelegate ()
 
@@ -26,12 +27,15 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
     // Create your various view controllers
-    UIViewController *wheatherVC= [[WheatherViewController alloc] init];
-    UIViewController *marksVC = [[MarksListViewController alloc] init];
-    UIViewController *mapVC = [[MapViewController alloc] init];
-    UIViewController *fishListVC = [[FishListViewController alloc] init];
+    WeatherViewController *weatherVC= [[WeatherViewController alloc] init];
+    WeatherViewModel *weatherViewModel = [WeatherViewModel new];
+    weatherVC.viewModel = weatherViewModel;
     
-    UINavigationController* wheatherNC = [[UINavigationController alloc] initWithRootViewController:wheatherVC];
+    MarksListViewController *marksVC = [[MarksListViewController alloc] init];
+    MapViewController *mapVC = [[MapViewController alloc] init];
+    FishListViewController *fishListVC = [[FishListViewController alloc] init];
+    
+    UINavigationController* wheatherNC = [[UINavigationController alloc] initWithRootViewController:weatherVC];
     wheatherNC.navigationBar.hidden = YES;
     UINavigationController* marksNC = [[UINavigationController alloc] initWithRootViewController:marksVC];
     marksNC.navigationBar.hidden = YES;

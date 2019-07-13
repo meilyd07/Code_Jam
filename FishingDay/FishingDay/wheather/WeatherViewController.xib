@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherViewController" customModule="FishingDay" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="5ue-vQ-xy5" id="4l2-cW-6Vm"/>
+                <outlet property="view" destination="iN0-l3-epB" id="she-Fc-evv"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5ue-vQ-xy5">
+                    <rect key="frame" x="0.0" y="166" width="414" height="696"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите локацию для получения погодных условий" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSR-eJ-mwa">
+                    <rect key="frame" x="23" y="64" width="367" height="41"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                    <color key="textColor" red="0.015627510850000002" green="0.40688982260000001" blue="0.62943181150000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Список сохраненных меток:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFn-fK-kIg">
+                    <rect key="frame" x="23" y="125" width="367" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5ue-vQ-xy5" secondAttribute="bottom" id="BOQ-PC-WaR"/>
+                <constraint firstItem="hSR-eJ-mwa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="23" id="ECC-ID-Ev6"/>
+                <constraint firstItem="5ue-vQ-xy5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="EhL-fi-Bqb"/>
+                <constraint firstItem="5ue-vQ-xy5" firstAttribute="top" secondItem="nFn-fK-kIg" secondAttribute="bottom" constant="20" id="M9B-WR-58j"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nFn-fK-kIg" secondAttribute="trailing" constant="24" id="RUG-50-mvR"/>
+                <constraint firstAttribute="trailing" secondItem="hSR-eJ-mwa" secondAttribute="trailing" constant="24" id="byd-2U-IvT"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5ue-vQ-xy5" secondAttribute="trailing" id="jLU-5F-Dkg"/>
+                <constraint firstItem="nFn-fK-kIg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="23" id="n9B-P0-wt0"/>
+                <constraint firstItem="hSR-eJ-mwa" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="nZI-5p-ja1"/>
+                <constraint firstItem="nFn-fK-kIg" firstAttribute="top" secondItem="hSR-eJ-mwa" secondAttribute="bottom" constant="20" id="y89-4S-QcA"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="137.68115942028987" y="131.91964285714286"/>
+        </view>
+    </objects>
+</document>
