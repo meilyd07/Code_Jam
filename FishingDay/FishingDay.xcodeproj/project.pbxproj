@@ -15,6 +15,11 @@
 		6AB238EC22D92FC600568D89 /* WheatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238EB22D92FC600568D89 /* WheatherViewController.m */; };
 		6AB238EF22D92FDD00568D89 /* FishListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238EE22D92FDD00568D89 /* FishListViewController.m */; };
 		6AB238F222D92FF400568D89 /* MarksListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238F122D92FF400568D89 /* MarksListViewController.m */; };
+		E37855AD22D9E13F003114FD /* MarkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E37855AB22D9E13F003114FD /* MarkTableViewCell.m */; };
+		E37855AE22D9E13F003114FD /* MarkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37855AC22D9E13F003114FD /* MarkTableViewCell.xib */; };
+		E37855B122D9EAEC003114FD /* Mark.m in Sources */ = {isa = PBXBuildFile; fileRef = E37855B022D9EAEC003114FD /* Mark.m */; };
+		E37855BA22DA07AE003114FD /* MarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E37855B822DA07AE003114FD /* MarkViewController.m */; };
+		E37855BB22DA07AE003114FD /* MarkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37855B922DA07AE003114FD /* MarkViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +38,15 @@
 		6AB238EE22D92FDD00568D89 /* FishListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishListViewController.m; sourceTree = "<group>"; };
 		6AB238F022D92FF400568D89 /* MarksListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarksListViewController.h; sourceTree = "<group>"; };
 		6AB238F122D92FF400568D89 /* MarksListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarksListViewController.m; sourceTree = "<group>"; };
+		E37855AA22D9E13F003114FD /* MarkTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkTableViewCell.h; sourceTree = "<group>"; };
+		E37855AB22D9E13F003114FD /* MarkTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarkTableViewCell.m; sourceTree = "<group>"; };
+		E37855AC22D9E13F003114FD /* MarkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkTableViewCell.xib; sourceTree = "<group>"; };
+		E37855B022D9EAEC003114FD /* Mark.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Mark.m; sourceTree = "<group>"; };
+		E37855B222D9EAF7003114FD /* Mark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mark.h; sourceTree = "<group>"; };
+		E37855B422D9F01F003114FD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E37855B722DA07AE003114FD /* MarkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkViewController.h; sourceTree = "<group>"; };
+		E37855B822DA07AE003114FD /* MarkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarkViewController.m; sourceTree = "<group>"; };
+		E37855B922DA07AE003114FD /* MarkViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +65,7 @@
 			children = (
 				6AB238D022D92D0E00568D89 /* FishingDay */,
 				6AB238CF22D92D0E00568D89 /* Products */,
+				E37855B322D9F01F003114FD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +80,7 @@
 		6AB238D022D92D0E00568D89 /* FishingDay */ = {
 			isa = PBXGroup;
 			children = (
+				E37855AF22D9EAC0003114FD /* MarkModel */,
 				6AB238F622D930A000568D89 /* map */,
 				6AB238F522D9308A00568D89 /* fishList */,
 				6AB238F422D9307600568D89 /* marks */,
@@ -91,6 +107,8 @@
 		6AB238F422D9307600568D89 /* marks */ = {
 			isa = PBXGroup;
 			children = (
+				E37855B622D9FF13003114FD /* MarkViewController */,
+				E37855A922D9E11F003114FD /* MarkTableViewCell */,
 				6AB238F022D92FF400568D89 /* MarksListViewController.h */,
 				6AB238F122D92FF400568D89 /* MarksListViewController.m */,
 			);
@@ -113,6 +131,43 @@
 				6AB238E822D92FAE00568D89 /* MapViewController.m */,
 			);
 			path = map;
+			sourceTree = "<group>";
+		};
+		E37855A922D9E11F003114FD /* MarkTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				E37855AA22D9E13F003114FD /* MarkTableViewCell.h */,
+				E37855AB22D9E13F003114FD /* MarkTableViewCell.m */,
+				E37855AC22D9E13F003114FD /* MarkTableViewCell.xib */,
+			);
+			path = MarkTableViewCell;
+			sourceTree = "<group>";
+		};
+		E37855AF22D9EAC0003114FD /* MarkModel */ = {
+			isa = PBXGroup;
+			children = (
+				E37855B222D9EAF7003114FD /* Mark.h */,
+				E37855B022D9EAEC003114FD /* Mark.m */,
+			);
+			path = MarkModel;
+			sourceTree = "<group>";
+		};
+		E37855B322D9F01F003114FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E37855B422D9F01F003114FD /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E37855B622D9FF13003114FD /* MarkViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E37855B722DA07AE003114FD /* MarkViewController.h */,
+				E37855B822DA07AE003114FD /* MarkViewController.m */,
+				E37855B922DA07AE003114FD /* MarkViewController.xib */,
+			);
+			path = MarkViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,7 +228,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AB238DE22D92D0F00568D89 /* LaunchScreen.storyboard in Resources */,
+				E37855BB22DA07AE003114FD /* MarkViewController.xib in Resources */,
 				6AB238DB22D92D0F00568D89 /* Assets.xcassets in Resources */,
+				E37855AE22D9E13F003114FD /* MarkTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,8 +242,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AB238E122D92D0F00568D89 /* main.m in Sources */,
+				E37855AD22D9E13F003114FD /* MarkTableViewCell.m in Sources */,
 				6AB238F222D92FF400568D89 /* MarksListViewController.m in Sources */,
 				6AB238D322D92D0E00568D89 /* AppDelegate.m in Sources */,
+				E37855B122D9EAEC003114FD /* Mark.m in Sources */,
+				E37855BA22DA07AE003114FD /* MarkViewController.m in Sources */,
 				6AB238EC22D92FC600568D89 /* WheatherViewController.m in Sources */,
 				6AB238E922D92FAE00568D89 /* MapViewController.m in Sources */,
 				6AB238EF22D92FDD00568D89 /* FishListViewController.m in Sources */,
