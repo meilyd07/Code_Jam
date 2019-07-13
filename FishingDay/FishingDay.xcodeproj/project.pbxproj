@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320F891422D9C93C00EE619C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 320F891322D9C93C00EE619C /* MapKit.framework */; };
 		6AB238D322D92D0E00568D89 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238D222D92D0E00568D89 /* AppDelegate.m */; };
 		6AB238DB22D92D0F00568D89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AB238DA22D92D0F00568D89 /* Assets.xcassets */; };
 		6AB238DE22D92D0F00568D89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AB238DC22D92D0F00568D89 /* LaunchScreen.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		320F891322D9C93C00EE619C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6AB238CE22D92D0E00568D89 /* FishingDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishingDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB238D122D92D0E00568D89 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AB238D222D92D0E00568D89 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -40,17 +42,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				320F891422D9C93C00EE619C /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		320F891222D9C93C00EE619C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				320F891322D9C93C00EE619C /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6AB238C522D92D0E00568D89 = {
 			isa = PBXGroup;
 			children = (
 				6AB238D022D92D0E00568D89 /* FishingDay */,
 				6AB238CF22D92D0E00568D89 /* Products */,
+				320F891222D9C93C00EE619C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
