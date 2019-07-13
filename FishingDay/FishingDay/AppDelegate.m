@@ -38,7 +38,7 @@
     UINavigationController* mapNC = [[UINavigationController alloc] initWithRootViewController:mapVC];
     mapNC.navigationBar.hidden = YES;
     UINavigationController* fishListNC = [[UINavigationController alloc] initWithRootViewController:fishListVC];
-    fishListNC.navigationBar.hidden = YES;
+    fishListNC.navigationBar.hidden = NO;
     
     UITabBarItem *itemMarks = [[UITabBarItem alloc] initWithTitle:@"Список мест" image:[UIImage imageNamed:@"fishing_pole"] tag:0];
     UITabBarItem *itemMap = [[UITabBarItem alloc] initWithTitle:@"Места на карте" image:[UIImage imageNamed:@"map"] tag:1];

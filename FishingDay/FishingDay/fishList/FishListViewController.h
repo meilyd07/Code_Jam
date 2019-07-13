@@ -1,17 +1,16 @@
 //
-//  FishListViewController.h
+//  ImageTableViewController.h
 //  FishingDay
 //
-//  Created by Hanna Rybakova on 7/13/19.
+//  Created by Иван on 7/13/19.
 //  Copyright © 2019 None. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+extern NSString * const key1;
+extern NSString * const key2;
 
 @interface FishListViewController : UIViewController
 
 @end
-
-NS_ASSUME_NONNULL_END
