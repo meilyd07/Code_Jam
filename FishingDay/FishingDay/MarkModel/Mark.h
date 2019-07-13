@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 extern NSString * const marksDataKey;
 
 @interface Mark : NSObject <NSCoding, NSSecureCoding>
 
-//TODO: add property to store location
+@property (assign, nonatomic) CLLocationCoordinate2D location;
 @property (strong, nonatomic) UIImage *photo;
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *details;

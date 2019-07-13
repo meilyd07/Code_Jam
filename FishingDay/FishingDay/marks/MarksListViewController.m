@@ -29,7 +29,6 @@ NSString * const markCellId = @"markCellId";
     self.navigationItem.title = @"Места улова рыбы";
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMark)];
     self.navigationItem.rightBarButtonItem = addButton;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveData) name:UIApplicationDidEnterBackgroundNotification object:nil];
     
     UITableView *marksTableView = [UITableView new];
     [self.view addSubview:marksTableView];
@@ -67,14 +66,15 @@ NSString * const markCellId = @"markCellId";
     } else {
         NSSet *classes = [NSSet setWithObjects:[NSArray class], [Mark class], nil];
         NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:marksData error:nil];
-        if (decodedMarks) {
-            self.marks = decodedMarks;
-        }
+        self.marks = decodedMarks;
     }
 }
 
 - (void)addMark {
-    //TODO: open map to get location
+    MarkViewController *markVC = [MarkViewController new];
+    markVC.row = self.marks.count;
+    [self.navigationController pushViewController:markVC animated:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(markChanged:) name:markChangedNotification object:markVC];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -100,14 +100,34 @@ NSString * const markCellId = @"markCellId";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(markChanged:) name:markChangedNotification object:markVC];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSMutableArray *marks = [self mutableArrayValueForKey:@"marks"];
+        [marks removeObjectAtIndex:indexPath.row];
+        [self saveData];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView reloadData];
+}
+
 - (void)markChanged:(NSNotification *)notification {
     MarkViewController *markVC = notification.object;
     NSInteger row = markVC.row;
-    Mark *mark = self.marks[row];
+    Mark *mark;
+    if (row == self.marks.count) { // create mark
+        mark = [Mark new];
+        NSMutableArray *marks = [self mutableArrayValueForKey:@"marks"];
+        [marks addObject:mark];
+    } else { // update mark
+        mark = self.marks[row];
+    }
     mark.title = markVC.mark.title;
     mark.details = markVC.mark.details;
+    mark.photo = markVC.mark.photo;
+    [self.tableView reloadData];
     [self saveData];
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)saveData {
