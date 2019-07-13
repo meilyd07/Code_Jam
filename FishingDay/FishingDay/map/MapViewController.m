@@ -24,6 +24,8 @@
 - (void)loadView {
     [super loadView];
     
+    self.tabBarController.tabBar.translucent = YES;
+    
     [self initLocationManager];
     [self initMap];
     
@@ -58,23 +60,14 @@
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectZero];
     self.mapView.translatesAutoresizingMaskIntoConstraints = NO;
     self.mapView.delegate = self;
-    
-    UINavigationBar *navBar = self.navigationController.navigationBar;
-    UITabBar *tabBar = self.tabBarController.tabBar;
-    
-    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
-    
-    NSInteger navBarHeight = CGRectGetHeight(statusBarFrame) + CGRectGetHeight(navBar.frame);
-    NSInteger tabBarHeight = CGRectGetHeight(tabBar.frame);
-    
 
     [self.view addSubview:self.mapView];
     
     [NSLayoutConstraint activateConstraints:@[
-                                              [self.mapView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:navBarHeight],
+                                              [self.mapView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
                                               [self.mapView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
                                               [self.mapView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
-                                              [self.mapView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-tabBarHeight],
+                                              [self.mapView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
                                               ]];
 }
 
