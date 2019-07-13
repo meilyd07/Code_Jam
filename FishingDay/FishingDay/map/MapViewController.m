@@ -6,9 +6,10 @@
 //  Copyright © 2019 None. All rights reserved.
 //
 
-#import "MapViewController.h"
-#import <CoreLocation/CLLocationManager.h>
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CLLocationManager.h>
+
+#import "MapViewController.h"
 
 @interface MapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 @property(strong, nonatomic) MKMapView *mapView;
@@ -60,6 +61,15 @@
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectZero];
     self.mapView.translatesAutoresizingMaskIntoConstraints = NO;
     self.mapView.delegate = self;
+    
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longPressGesture.minimumPressDuration = 0.5f;
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [tapGesture shouldRequireFailureOfGestureRecognizer:longPressGesture];
+    
+    [self.mapView addGestureRecognizer:tapGesture];
+    [self.mapView addGestureRecognizer:longPressGesture];
 
     [self.view addSubview:self.mapView];
     
@@ -86,27 +96,26 @@
 #pragma mark - <MKMapViewDelegate>
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
-    NSLog(@"region will change!");
+//    scroll start
 }
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    NSLog(@"region did change!");
+//    scroll finished
 }
 
 - (void)mapViewDidChangeVisibleRegion:(MKMapView *)mapView {
-    NSLog(@"View did change visible Region!");
+//    on every! scroll
 }
-//
-//- (void)mapViewWillStartLoadingMap:(MKMapView *)mapView;
-//- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView;
-//- (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error;
-//
-//- (void)mapViewWillStartRenderingMap:(MKMapView *)mapView NS_AVAILABLE(10_9, 7_0);
-//- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered NS_AVAILABLE(10_9, 7_0);
-//
-//- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray<MKAnnotationView *> *)views;
-//- (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation;
-//
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray<MKAnnotationView *> *)views {
+    NSLog(@"mapView DID ADD ANNOTATION view");
+}
+
+- (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    NSLog(@"- ()... --> viewForAnnotation");
+    return nil;
+}
+
 //- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0);
 //- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view NS_AVAILABLE(10_9, 4_0);
 //
@@ -123,6 +132,28 @@
 //- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay NS_AVAILABLE(10_9, 7_0);
 //- (void)mapView:(MKMapView *)mapView didAddOverlayRenderers:(NSArray<MKOverlayRenderer *> *)renderers NS_AVAILABLE(10_9, 7_0);
 
+
+#pragma mark - Touch Handlers
+
+- (void)handleLongPress:(UITapGestureRecognizer *)longTapGesture {
+    if (longTapGesture.state == UIGestureRecognizerStateEnded) {
+        
+        CGPoint point = [longTapGesture locationInView:self.mapView];
+        CLLocationCoordinate2D coordingate = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
+        
+        
+        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+        annotation.coordinate = coordingate;
+        annotation.subtitle = @"sub";
+        annotation.title = @"ola";
+        
+        [self.mapView addAnnotation:annotation];
+    }
+}
+
+- (void)handleTap:(UITapGestureRecognizer *)tapGesture {
+//    NSLog(@"Tap gesture");
+}
 
 #pragma mark - <CLLocationManagerDelegate>
 
