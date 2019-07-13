@@ -58,6 +58,7 @@
     
     //[mainViewController.view setBackgroundColor:[UIColor whiteColor]];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+    navigationController.navigationBar.hidden = YES;
     [self.window setRootViewController:navigationController];
     [self.window makeKeyAndVisible];
     

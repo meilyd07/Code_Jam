@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface Mark : NSObject <NSCoding>
+extern NSString * const marksDataKey;
+
+@interface Mark : NSObject <NSCoding, NSSecureCoding>
 
 //TODO: add property to store location
 @property (strong, nonatomic) UIImage *photo;

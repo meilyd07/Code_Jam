@@ -25,9 +25,11 @@ NSString * const markCellId = @"markCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    self.navigationController.navigationBar.hidden = NO;
     self.navigationItem.title = @"Места улова рыбы";
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMark)];
     self.navigationItem.rightBarButtonItem = addButton;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveData) name:UIApplicationDidEnterBackgroundNotification object:nil];
     
     UITableView *marksTableView = [UITableView new];
     [self.view addSubview:marksTableView];
@@ -45,26 +47,30 @@ NSString * const markCellId = @"markCellId";
     self.tableView.dataSource = self;
     
     self.marks = [NSArray array];
-//    NSData *marksData = [[NSUserDefaults standardUserDefaults] objectForKey:@"marks"];
-//    if (!marksData) {
+    NSData *marksData = [[NSUserDefaults standardUserDefaults] objectForKey:marksDataKey];
+    if (!marksData) {
 //        self.tableView.hidden = YES;
 //        UIImageView *noDataImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fishWallpaper"]];
 //        [self.view addSubview:noDataImageView];
-//    } else {
-//        NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSArray class] fromData:marksData error:nil];
-//        if (decodedMarks) {
-//            self.marks = decodedMarks;
-//        }
-//    }
-    NSMutableArray *tempMarks = [NSMutableArray array];
-    for (int i = 0; i < 5; i++) {
-        Mark *mark = [Mark new];
-        mark.photo = [UIImage imageNamed:@"fish_food"];
-        mark.title = [NSString stringWithFormat:@"Mark %d", i + 1];
-        mark.details = @"aaaaaaaaaaaaaaaaaa";
-        [tempMarks addObject:mark];
+        
+        NSMutableArray *tempMarks = [NSMutableArray array];
+        for (int i = 0; i < 5; i++) {
+            Mark *mark = [Mark new];
+            mark.photo = [UIImage imageNamed:@"fish_food"];
+            mark.title = [NSString stringWithFormat:@"Mark %d", i + 1];
+            mark.details = @"aaaaaaaaaaaaaaaaaa";
+            [tempMarks addObject:mark];
+        }
+        self.marks = tempMarks;
+        
+        
+    } else {
+        NSSet *classes = [NSSet setWithObjects:[NSArray class], [Mark class], nil];
+        NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:marksData error:nil];
+        if (decodedMarks) {
+            self.marks = decodedMarks;
+        }
     }
-    self.marks = tempMarks;
 }
 
 - (void)addMark {
@@ -88,10 +94,31 @@ NSString * const markCellId = @"markCellId";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     Mark *mark = self.marks[indexPath.row];
     MarkViewController *markVC = [MarkViewController new];
-    markVC.photoImageView.image = mark.photo;
-    markVC.titleTextField.placeholder = mark.title;
-    markVC.detailsTextField.placeholder = mark.details;
+    markVC.mark = mark;
+    markVC.row = indexPath.row;
     [self.navigationController pushViewController:markVC animated:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(markChanged:) name:markChangedNotification object:markVC];
+}
+
+- (void)markChanged:(NSNotification *)notification {
+    MarkViewController *markVC = notification.object;
+    NSInteger row = markVC.row;
+    Mark *mark = self.marks[row];
+    mark.title = markVC.mark.title;
+    mark.details = markVC.mark.details;
+    [self saveData];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)saveData {
+    NSData *marksData = [NSKeyedArchiver archivedDataWithRootObject:self.marks requiringSecureCoding:NO error:nil];
+    [[NSUserDefaults standardUserDefaults] setObject:marksData forKey:marksDataKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

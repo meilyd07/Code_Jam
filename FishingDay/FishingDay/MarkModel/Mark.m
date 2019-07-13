@@ -8,6 +8,8 @@
 
 #import "Mark.h"
 
+NSString * const marksDataKey = @"marksDataKey";
+
 @implementation Mark
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -24,6 +26,10 @@
     [coder encodeObject:self.title forKey:@"title"];
     [coder encodeObject:self.details forKey:@"details"];
     [coder encodeObject:self.photo forKey:@"photo"];
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
 }
 
 @end

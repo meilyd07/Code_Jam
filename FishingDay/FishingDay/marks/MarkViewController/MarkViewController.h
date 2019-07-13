@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Mark.h"
 
-NS_ASSUME_NONNULL_BEGIN
+extern NSString * const markChangedNotification;
 
 @interface MarkViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
-@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
-@property (weak, nonatomic) IBOutlet UITextField *detailsTextField;
+@property (strong, nonatomic) Mark *mark;
+@property (assign, nonatomic) NSInteger row;
 
 @end
-
-NS_ASSUME_NONNULL_END
