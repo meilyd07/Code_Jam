@@ -7,6 +7,7 @@
 //
 
 #import "WeatherDetailViewModel.h"
+#import "WeatherService.h"
 
 @implementation WeatherDetailViewModel
 - (id)initWithMark:(Mark *)mark {
@@ -17,8 +18,15 @@
     return self;
 }
 
--(void)getWeatherData{
-    //dounload from internet
+-(void)getWeatherData:(void(^)(void))getCompletion {
+    NSString *longitude = [[NSString alloc] initWithFormat:@"%f", self.mark.location.longitude];
+    NSString *latitude = [[NSString alloc] initWithFormat:@"%f", self.mark.location.latitude];
+    [WeatherService.sharedInstance getWeatherForLongitude:longitude latitude:latitude completionHandler:
+     ^(NSData *data, NSURLResponse *response, NSError *error) {
+         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+         NSLog(@"%@", json);
+         getCompletion();
+     }];
 }
 
 -(NSString *)getWindDirectionValue {

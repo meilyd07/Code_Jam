@@ -11,7 +11,6 @@
 
 @interface WeatherDetailViewModel : NSObject
 @property (strong, nonatomic) Mark *mark;
-//@property (assign, nonatomic) NSInteger row;
 - (id)initWithMark:(Mark *)mark;
 -(NSString *)getWindDirectionValue;
 -(NSString *)getWindSpeedValue;
@@ -20,5 +19,6 @@
 -(NSString *)getMaxTemperatureValue;
 -(NSString *)getAtmosphericPressureValue;
 -(NSString *)getHumidityValue;
+-(void)getWeatherData:(void(^)(void))getCompletion;
 @end
 
