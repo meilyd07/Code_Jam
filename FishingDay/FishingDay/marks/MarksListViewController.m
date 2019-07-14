@@ -44,6 +44,8 @@ NSString * const markCellId = @"markCellId";
     self.tableView.tableFooterView = [UIView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 300;
     
     self.marks = [NSArray array];
     NSData *marksData = [[NSUserDefaults standardUserDefaults] objectForKey:marksDataKey];

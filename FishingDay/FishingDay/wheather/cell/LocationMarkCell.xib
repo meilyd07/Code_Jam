@@ -31,7 +31,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wGZ-yO-3RX">
-                        <rect key="frame" x="56" y="13" width="254" height="15.5"/>
+                        <rect key="frame" x="56" y="13" width="244" height="15.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.009992485782150444" green="0.27747820192007122" blue="0.43139426176525209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                     <constraint firstAttribute="bottom" secondItem="wGZ-yO-3RX" secondAttribute="bottom" constant="15" id="3jr-AD-OjT"/>
                     <constraint firstItem="lnk-FJ-kGT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="Sj0-Ny-czm"/>
                     <constraint firstItem="lnk-FJ-kGT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Txm-1J-zYb"/>
-                    <constraint firstAttribute="trailing" secondItem="wGZ-yO-3RX" secondAttribute="trailing" constant="10" id="VPg-UK-xZ5"/>
+                    <constraint firstAttribute="trailing" secondItem="wGZ-yO-3RX" secondAttribute="trailing" constant="20" id="VPg-UK-xZ5"/>
                     <constraint firstItem="wGZ-yO-3RX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="dKm-at-Tfh"/>
                 </constraints>
             </tableViewCellContentView>
