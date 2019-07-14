@@ -262,6 +262,11 @@ NSString * const annotationReuseId = @"annotation";
     }
 }
 
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    CLLocation *location = [self.locationManager location];
+    [self.mapView setCenterCoordinate:[location coordinate] animated:YES];
+}
+
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
