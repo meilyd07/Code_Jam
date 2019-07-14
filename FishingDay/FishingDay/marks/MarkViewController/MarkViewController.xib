@@ -17,7 +17,6 @@
                 <outlet property="mapView" destination="ijj-Rb-Oq9" id="5lr-Ky-F6T"/>
                 <outlet property="photoButton" destination="eQZ-BG-dbN" id="XHx-p3-rcs"/>
                 <outlet property="photoImageView" destination="Ur6-zL-OKf" id="6Oj-X9-W8M"/>
-                <outlet property="saveButton" destination="57v-mj-ARK" id="qHI-ku-T9s"/>
                 <outlet property="scrollView" destination="7QE-mW-UZf" id="TYp-Ya-Icj"/>
                 <outlet property="scrollViewBottomConstraint" destination="Ir7-UE-FVg" id="Olz-us-J5R"/>
                 <outlet property="titleTextField" destination="b16-am-Xcx" id="L4H-0e-H5N"/>
@@ -65,6 +64,9 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="150" id="prB-lQ-TUd"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="EZx-bF-WD2"/>
+                                    </connections>
                                 </mapView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqB-EE-Kiv">
                                     <rect key="frame" x="0.0" y="200" width="290" height="20.5"/>
