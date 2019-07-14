@@ -8,6 +8,33 @@
 
 #import "FishModel.h"
 
+
+NSString * const fishesDataKey = @"fishesDataKey";
+
 @implementation FishModel
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super init];
+    
+    self.idFish = [coder decodeObjectOfClass:[NSNumber class] forKey:@"idFish"];
+    self.nameFish = [coder decodeObjectOfClass:[NSString class] forKey:@"nameFish"];
+    self.imageUrl = [coder decodeObjectOfClass:[NSString class] forKey:@"imageUrl"];
+    self.minTemperature = [coder decodeObjectOfClass:[NSNumber class] forKey:@"minTemperature"];
+     self.maxTemperature = [coder decodeObjectOfClass:[NSNumber class] forKey:@"maxTemperature"];
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.idFish forKey:@"idFish"];
+    [coder encodeObject:self.nameFish forKey:@"nameFish"];
+    [coder encodeObject:self.imageUrl forKey:@"imageUrl"];
+     [coder encodeObject:self.minTemperature forKey:@"minTemperature"];
+     [coder encodeObject:self.maxTemperature forKey:@"maxTemperature"];
+}
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 @end

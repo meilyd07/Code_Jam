@@ -1,24 +1,23 @@
 //
-//  ImageViewController.m
+//  FishInfoViewController.m
 //  FishingDay
 //
-//  Created by Иван on 7/13/19.
+//  Created by Иван on 7/14/19.
 //  Copyright © 2019 None. All rights reserved.
 //
 
 #import "FishInfoViewController.h"
 #import "FishListViewController.h"
 
-
 @interface FishInfoViewController ()
-
-@property (weak, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIImageView *fishImageViiew;
+@property (strong, nonatomic) IBOutlet UILabel *fishNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fishMaxLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fishMinLabel;
 
 @end
 
 @implementation FishInfoViewController
-
-#pragma mark - Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,34 +29,47 @@
     }
     [self setupImageView];
 }
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - Private
 
 - (void)setupImageView {
+    
+    
     UIImageView *imageView = [[UIImageView alloc] initWithImage:self.image];
     [self.view addSubview:imageView];
-    self.imageView = imageView;
-    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [NSLayoutConstraint activateConstraints:@[[self.imageView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:10],
-                                              [self.imageView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:10],
-                                              [self.view.safeAreaLayoutGuide.trailingAnchor constraintEqualToAnchor:self.imageView.trailingAnchor constant:10],
-                                              [self.view.safeAreaLayoutGuide.bottomAnchor constraintEqualToAnchor:self.imageView.bottomAnchor constant:400]]];
+    self.fishImageViiew = imageView;
+    self.fishImageViiew.translatesAutoresizingMaskIntoConstraints = NO;
+    self.fishImageViiew.contentMode = UIViewContentModeScaleAspectFit;
+    [NSLayoutConstraint activateConstraints:@[[self.fishImageViiew.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:10],
+                                              [self.fishImageViiew.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:10],
+                                              [self.fishImageViiew.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:10],
+                                              [self.fishImageViiew.heightAnchor constraintEqualToConstant:200],
+                                              ]];
+    
+    
+    //UILabel *lab = [[UILabel alloc] initWithFrame:CGRectZero];
+   // self.fishNameLabel = lab;
+    self.fishNameLabel.text = self.fish.nameFish;
+    self.fishNameLabel.textColor = [UIColor blackColor];
+    
+    NSString *str = self.fishNameLabel.text;
+   // self.fishNameLabel.text = [self.fish.minTemperature stringValue];
+   // self.fishNameLabel.text = [self.fish.maxTemperature stringValue];
+    
+    
+    
+    
 }
-
-#pragma mark - Notifications
 
 - (void)imageChanged:(NSNotification *)notification {
     if (![[notification.userInfo objectForKey:key2] boolValue]) {
         [self.navigationController popViewControllerAnimated:YES];
     }
     self.image = [notification.userInfo objectForKey:key1];
-    self.imageView.image = self.image;
+    self.fishImageViiew.image = self.image;
 }
 
 @end
