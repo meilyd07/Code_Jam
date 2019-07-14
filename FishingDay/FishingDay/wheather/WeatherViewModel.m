@@ -20,16 +20,6 @@
         NSSet *classes = [NSSet setWithObjects:[NSArray class], [Mark class], nil];
         NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:marksData error:nil];
         self.marks = decodedMarks;
-    } else {
-        NSMutableArray *tempMarks = [NSMutableArray array];
-        for (int i = 0; i < 5; i++) {
-            Mark *mark = [Mark new];
-            mark.photo = [UIImage imageNamed:@"fish_food"];
-            mark.title = [NSString stringWithFormat:@"Mark %d", i + 1];
-            mark.details = @"aaaaaaaaaaaaaaaaaa";
-            [tempMarks addObject:mark];
-        }
-        self.marks = tempMarks;
     }
 }
 

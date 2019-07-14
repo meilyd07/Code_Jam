@@ -11,7 +11,6 @@
 
 @interface LocationMarkCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *markTitle;
-@property (strong, nonatomic) NSString *uniqueId;
 @property (weak, nonatomic) IBOutlet UIButton *buttonInfo;
 
 @property (weak, nonatomic) id<LocationMarkCellDelegate>delegate;

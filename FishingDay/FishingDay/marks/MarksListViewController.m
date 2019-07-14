@@ -112,6 +112,7 @@ NSString * const markCellId = @"markCellId";
         return;
     }
     MarkViewController *markVC = [MarkViewController new];
+    markVC.isCurrentLocation = YES;
     markVC.row = self.marks.count;
     [self.navigationController pushViewController:markVC animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(markChanged:) name:markChangedNotification object:markVC];
@@ -163,6 +164,7 @@ NSString * const markCellId = @"markCellId";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     Mark *mark = self.marks[indexPath.row];
     MarkViewController *markVC = [MarkViewController new];
+    markVC.isCurrentLocation = NO;
     markVC.mark = mark;
     markVC.row = indexPath.row;
     [self.navigationController pushViewController:markVC animated:YES];
