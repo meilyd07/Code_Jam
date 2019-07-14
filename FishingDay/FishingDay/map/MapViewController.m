@@ -19,6 +19,8 @@
 @property(assign, nonatomic) CLLocationCoordinate2D currentPosition;
 @end
 
+NSString * const annotationReuseId = @"annotation";
+
 @implementation MapViewController
 
 #pragma mark - Lifecycle
@@ -69,6 +71,8 @@
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectZero];
     self.mapView.translatesAutoresizingMaskIntoConstraints = NO;
     self.mapView.delegate = self;
+    
+    [self.mapView registerClass:[MKAnnotationView class] forAnnotationViewWithReuseIdentifier:annotationReuseId];
     
     [self zoomMap:self.mapView byDelta:0.00003f];
     
@@ -153,8 +157,14 @@
 }
 
 - (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-    NSLog(@"- ()... --> viewForAnnotation");
-    return nil;
+    MKAnnotationView *view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationReuseId];
+    
+    UIImage *image = [UIImage imageNamed:@"pin"];
+    view.annotation = annotation;
+    view.image = image;
+    view.canShowCallout = YES;
+    
+    return view;
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
