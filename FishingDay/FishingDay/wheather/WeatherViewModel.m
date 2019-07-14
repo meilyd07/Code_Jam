@@ -8,18 +8,19 @@
 
 #import "WeatherViewModel.h"
 @interface WeatherViewModel()
-@property (copy, nonatomic) NSArray *marks;
+@property (copy, nonatomic) NSMutableArray *marks;
 @end
 
 @implementation WeatherViewModel
 
 -(void)getData{
-    self.marks = [NSArray array];
     NSData *marksData = [[NSUserDefaults standardUserDefaults] objectForKey:marksDataKey];
     if (marksData) {
         NSSet *classes = [NSSet setWithObjects:[NSArray class], [Mark class], nil];
         NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:marksData error:nil];
-        self.marks = decodedMarks;
+        self.marks = [decodedMarks mutableCopy];
+    } else {
+        self.marks = [NSMutableArray array];
     }
 }
 

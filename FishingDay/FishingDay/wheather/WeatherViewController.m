@@ -31,6 +31,7 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.viewModel getData];
+    [self.tableView reloadData];
 }
 
 -(void)setupTable {

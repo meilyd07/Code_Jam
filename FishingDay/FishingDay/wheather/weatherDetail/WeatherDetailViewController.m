@@ -96,7 +96,7 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
     case temperatureSection:
             return @"Температура:";
     case pressureAndHumiditySection:
-            return @"Атмосферное давление и влажность";
+            return @"Атм. давление и влажность";
     case windSection:
             return @"Параметры ветра";
     default:
