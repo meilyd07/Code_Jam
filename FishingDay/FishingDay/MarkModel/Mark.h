@@ -15,8 +15,6 @@ extern NSString * const marksDataKey;
 @interface Mark : NSObject <NSCoding, NSSecureCoding>
 
 @property (assign, nonatomic) CLLocationCoordinate2D location;
-@property (assign, nonatomic) double latitude;
-@property (assign, nonatomic) double longitude;
 @property (strong, nonatomic) UIImage *photo;
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *details;

@@ -41,15 +41,15 @@ NSString * const markChangedNotification = @"markChangedNotification";
         }
         self.titleTextField.text = self.mark.title;
         self.detailsTextField.text = self.mark.details;
-        MKCoordinateRegion region = MKCoordinateRegionMake(self.mark.location, MKCoordinateSpanMake(0.1, 0.1));
-        MKPointAnnotation *annotation = [MKPointAnnotation new];
-        annotation.coordinate = self.mark.location;
-        [self.mapView addAnnotation:annotation];
-        self.mapView.region = region;
     } else {
         self.mark = [Mark new];
-        //set current location
+        //self.mark.location = 
     }
+    MKCoordinateRegion region = MKCoordinateRegionMake(self.mark.location, MKCoordinateSpanMake(0.1, 0.1));
+    MKPointAnnotation *annotation = [MKPointAnnotation new];
+    annotation.coordinate = self.mark.location;
+    [self.mapView addAnnotation:annotation];
+    self.mapView.region = region;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }

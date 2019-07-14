@@ -15,9 +15,9 @@ NSString * const marksDataKey = @"marksDataKey";
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super init];
-    self.latitude = [coder decodeDoubleForKey:@"latitude"];
-    self.longitude = [coder decodeDoubleForKey:@"longitude"];
-    self.location = CLLocationCoordinate2DMake(self.latitude, self.longitude);
+    CLLocationDegrees latitude = [coder decodeDoubleForKey:@"latitude"];
+    CLLocationDegrees longitude = [coder decodeDoubleForKey:@"longitude"];
+    self.location = CLLocationCoordinate2DMake(latitude, longitude);
     self.title = [coder decodeObjectOfClass:[NSString class] forKey:@"title"];
     self.details = [coder decodeObjectOfClass:[NSString class] forKey:@"details"];
     self.photo = [coder decodeObjectOfClass:[UIImage class] forKey:@"photo"];
@@ -26,8 +26,8 @@ NSString * const marksDataKey = @"marksDataKey";
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeDouble:self.latitude forKey:@"latitude"];
-    [coder encodeDouble:self.longitude forKey:@"longitude"];
+    [coder encodeDouble:self.location.latitude forKey:@"latitude"];
+    [coder encodeDouble:self.location.longitude forKey:@"longitude"];
     [coder encodeObject:self.title forKey:@"title"];
     [coder encodeObject:self.details forKey:@"details"];
     [coder encodeObject:self.photo forKey:@"photo"];

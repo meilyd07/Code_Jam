@@ -59,9 +59,9 @@ NSString * const markCellId = @"markCellId";
             Mark *mark = [Mark new];
             mark.title = [NSString stringWithFormat:@"Mark %d", i + 1];
             mark.details = @"aaaaaaaaaaaaaaaaaa";
-            mark.latitude = 53.9615398 + i/20.0;
-            mark.longitude = 27.3475244 + i/20.0;
-            mark.location = CLLocationCoordinate2DMake(mark.latitude, mark.longitude);
+            CLLocationDegrees latitude = 53.9615398 + i/20.0;
+            CLLocationDegrees longitude = 27.3475244 + i/20.0;
+            mark.location = CLLocationCoordinate2DMake(latitude, longitude);
             [tempMarks addObject:mark];
         }
         self.marks = tempMarks;
