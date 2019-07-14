@@ -16,4 +16,36 @@
     }
     return self;
 }
+
+-(void)getWeatherData{
+    //dounload from internet
+}
+
+-(NSString *)getWindDirectionValue {
+    return @"76";
+}
+
+-(NSString *)getWindSpeedValue {
+    return @"15";
+}
+
+-(NSString *)getTemperatureValue {
+    return @"45";
+}
+
+-(NSString *)getMinTemperatureValue {
+    return @"77";
+}
+
+-(NSString *)getMaxTemperatureValue {
+    return @"55";
+}
+
+-(NSString *)getAtmosphericPressureValue {
+    return @"700";
+}
+
+-(NSString *)getHumidityValue {
+    return @"67";
+}
 @end

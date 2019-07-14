@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 enum WeatherSectionType:NSUInteger {
-    weatherSection,
-    fishSection
+    temperatureSection,
+    pressureAndHumiditySection,
+    windSection
 };
 
 enum WeatherItem:NSUInteger {
@@ -20,8 +21,7 @@ enum WeatherItem:NSUInteger {
     tempMin,
     tempMax,
     windSpeed,
-    windDeg,
-    fishesList
+    windDeg
 };
 
 @interface WeatherSection : NSObject

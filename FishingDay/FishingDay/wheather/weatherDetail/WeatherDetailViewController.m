@@ -9,6 +9,7 @@
 #import "WeatherDetailViewController.h"
 #import "WeatherDetailViewModel.h"
 #import "LocationMarkCell.h"
+#import "WeatherSection.h"
 
 @interface WeatherDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(strong, nonatomic) NSArray* sections;
@@ -21,18 +22,14 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.sections = @[
-                      [[WeatherSection alloc] init: weatherSection items:@[
+                      [[WeatherSection alloc] init: temperatureSection items:@[
                                            @(temperature),
-                                           @(pressure),
-                                           @(humidity),
                                            @(tempMax),
-                                           @(tempMin),
-                                           @(windSpeed),
-                                           @(windDeg)
+                                           @(tempMin)
                                            ]],
-                      
-                      [[WeatherSection alloc] init: fishSection items:@[@(fishesList)]]
-                      
+                      [[WeatherSection alloc] init: pressureAndHumiditySection items:@[@(pressure), @(humidity)]],
+                      [[WeatherSection alloc] init: windSection items:@[@(windSpeed),
+                                                                        @(windDeg)]],
                       ];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -55,8 +52,10 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
                                                       owner:self options:nil];
         markCell = (LocationMarkCell *)[nibs objectAtIndex:0];
     }
+
+    WeatherSection *section = (WeatherSection *)self.sections[indexPath.section];
+    enum WeatherItem current = [section.items[indexPath.row] integerValue];
     
-    NSUInteger current = ((WeatherSection *)self.sections[indexPath.section]).items[indexPath.row];
     switch (current) {
         case windDeg:
             markCell.markTitle.text = @"Направление ветра, градусы:";
@@ -65,19 +64,20 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
             markCell.markTitle.text = @"Скорость ветра, м/с:";
             break;
         default:
-            break;
+            markCell.markTitle.text = @"";
     }
     return markCell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSUInteger current = ((WeatherSection *)self.sections[section]).type;
-
     switch (current) {
-    case weatherSection:
-            return @"Температура, ветер, давление:";
-    case fishSection:
-            return @"Виды рыбы";
+    case temperatureSection:
+            return @"Температура:";
+    case pressureAndHumiditySection:
+            return @"Атмосферное давление и влажность";
+    case windSection:
+            return @"Параметры ветра";
     default:
             return @"";
     }
