@@ -17,14 +17,11 @@ NSString * const marksDataKey = @"marksDataKey";
     self = [super init];
     CLLocationDegrees latitude = [coder decodeDoubleForKey:@"latitude"];
     CLLocationDegrees longitude = [coder decodeDoubleForKey:@"longitude"];
+    
     self.location = CLLocationCoordinate2DMake(latitude, longitude);
     self.title = [coder decodeObjectOfClass:[NSString class] forKey:@"title"];
     self.details = [coder decodeObjectOfClass:[NSString class] forKey:@"details"];
     self.photo = [coder decodeObjectOfClass:[UIImage class] forKey:@"photo"];
-    
-//    CLLocationDegrees latitude = [coder decodeDoubleForKey:@"latitude"];
-//    CLLocationDegrees longitude = [coder decodeDoubleForKey:@"longitude"];
-    self.location = CLLocationCoordinate2DMake(latitude, longitude);
     
     return self;
 }
@@ -36,9 +33,6 @@ NSString * const marksDataKey = @"marksDataKey";
     [coder encodeObject:self.title forKey:@"title"];
     [coder encodeObject:self.details forKey:@"details"];
     [coder encodeObject:self.photo forKey:@"photo"];
-    
-    [coder encodeDouble:self.location.latitude forKey:@"latitude"];
-    [coder encodeDouble:self.location.longitude forKey:@"longitude"];
 }
 
 + (BOOL)supportsSecureCoding {
