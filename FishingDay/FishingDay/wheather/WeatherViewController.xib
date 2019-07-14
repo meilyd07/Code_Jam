@@ -40,9 +40,11 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hSR-eJ-mwa" secondAttribute="trailing" constant="24" id="6BZ-ac-jEE"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5ue-vQ-xy5" secondAttribute="bottom" id="BOQ-PC-WaR"/>
                 <constraint firstItem="hSR-eJ-mwa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="23" id="ECC-ID-Ev6"/>
                 <constraint firstItem="5ue-vQ-xy5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="EhL-fi-Bqb"/>
+                <constraint firstItem="hSR-eJ-mwa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="23" id="J1c-Bq-0cS"/>
                 <constraint firstItem="5ue-vQ-xy5" firstAttribute="top" secondItem="nFn-fK-kIg" secondAttribute="bottom" constant="20" id="M9B-WR-58j"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nFn-fK-kIg" secondAttribute="trailing" constant="24" id="RUG-50-mvR"/>
                 <constraint firstAttribute="trailing" secondItem="hSR-eJ-mwa" secondAttribute="trailing" constant="24" id="byd-2U-IvT"/>

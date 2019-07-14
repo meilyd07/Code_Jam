@@ -17,6 +17,10 @@
 		6A75CC7522DA851600F45D45 /* WeatherViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A75CC7422DA851600F45D45 /* WeatherViewController.xib */; };
 		6A75CC7A22DA906500F45D45 /* LocationMarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A75CC7722DA906500F45D45 /* LocationMarkCell.xib */; };
 		6A75CC7B22DA906500F45D45 /* LocationMarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A75CC7922DA906500F45D45 /* LocationMarkCell.m */; };
+		6A75CC8122DAAF4200F45D45 /* WeatherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A75CC7F22DAAF4200F45D45 /* WeatherDetailViewController.m */; };
+		6A75CC8222DAAF4200F45D45 /* WeatherDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A75CC8022DAAF4200F45D45 /* WeatherDetailViewController.xib */; };
+		6A75CC8522DAB1D700F45D45 /* WeatherSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A75CC8422DAB1D700F45D45 /* WeatherSection.m */; };
+		6A75CC8822DAB2F500F45D45 /* WeatherDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A75CC8722DAB2F500F45D45 /* WeatherDetailViewModel.m */; };
 		6AB238D322D92D0E00568D89 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238D222D92D0E00568D89 /* AppDelegate.m */; };
 		6AB238DB22D92D0F00568D89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AB238DA22D92D0F00568D89 /* Assets.xcassets */; };
 		6AB238DE22D92D0F00568D89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AB238DC22D92D0F00568D89 /* LaunchScreen.storyboard */; };
@@ -49,6 +53,13 @@
 		6A75CC7822DA906500F45D45 /* LocationMarkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMarkCell.h; sourceTree = "<group>"; };
 		6A75CC7922DA906500F45D45 /* LocationMarkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMarkCell.m; sourceTree = "<group>"; };
 		6A75CC7C22DA91B400F45D45 /* LocationMarkCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationMarkCellDelegate.h; sourceTree = "<group>"; };
+		6A75CC7E22DAAF4200F45D45 /* WeatherDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherDetailViewController.h; sourceTree = "<group>"; };
+		6A75CC7F22DAAF4200F45D45 /* WeatherDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherDetailViewController.m; sourceTree = "<group>"; };
+		6A75CC8022DAAF4200F45D45 /* WeatherDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherDetailViewController.xib; sourceTree = "<group>"; };
+		6A75CC8322DAB1D700F45D45 /* WeatherSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherSection.h; sourceTree = "<group>"; };
+		6A75CC8422DAB1D700F45D45 /* WeatherSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherSection.m; sourceTree = "<group>"; };
+		6A75CC8622DAB2F500F45D45 /* WeatherDetailViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherDetailViewModel.h; sourceTree = "<group>"; };
+		6A75CC8722DAB2F500F45D45 /* WeatherDetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherDetailViewModel.m; sourceTree = "<group>"; };
 		6AB238CE22D92D0E00568D89 /* FishingDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishingDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB238D122D92D0E00568D89 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AB238D222D92D0E00568D89 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -105,6 +116,20 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		6A75CC7D22DAAF0600F45D45 /* weatherDetail */ = {
+			isa = PBXGroup;
+			children = (
+				6A75CC7E22DAAF4200F45D45 /* WeatherDetailViewController.h */,
+				6A75CC7F22DAAF4200F45D45 /* WeatherDetailViewController.m */,
+				6A75CC8022DAAF4200F45D45 /* WeatherDetailViewController.xib */,
+				6A75CC8322DAB1D700F45D45 /* WeatherSection.h */,
+				6A75CC8422DAB1D700F45D45 /* WeatherSection.m */,
+				6A75CC8622DAB2F500F45D45 /* WeatherDetailViewModel.h */,
+				6A75CC8722DAB2F500F45D45 /* WeatherDetailViewModel.m */,
+			);
+			path = weatherDetail;
+			sourceTree = "<group>";
+		};
 		6AB238C522D92D0E00568D89 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +168,7 @@
 		6AB238F322D9305C00568D89 /* wheather */ = {
 			isa = PBXGroup;
 			children = (
+				6A75CC7D22DAAF0600F45D45 /* weatherDetail */,
 				6A75CC7622DA8FBE00F45D45 /* cell */,
 				6AB238EB22D92FC600568D89 /* WeatherViewController.m */,
 				6AB238EA22D92FC600568D89 /* WeatherViewController.h */,
@@ -274,6 +300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A75CC8222DAAF4200F45D45 /* WeatherDetailViewController.xib in Resources */,
 				6A75CC7A22DA906500F45D45 /* LocationMarkCell.xib in Resources */,
 				6A75CC7522DA851600F45D45 /* WeatherViewController.xib in Resources */,
 				6AB238DE22D92D0F00568D89 /* LaunchScreen.storyboard in Resources */,
@@ -290,12 +317,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A75CC8522DAB1D700F45D45 /* WeatherSection.m in Sources */,
 				6AB238E122D92D0F00568D89 /* main.m in Sources */,
 				E37855AD22D9E13F003114FD /* MarkTableViewCell.m in Sources */,
 				6AB238F222D92FF400568D89 /* MarksListViewController.m in Sources */,
 				5E0CBE3822DA458A00DC17FD /* FishInfoViewController.m in Sources */,
 				6AB238D322D92D0E00568D89 /* AppDelegate.m in Sources */,
 				5E0CBE3522DA452D00DC17FD /* FishTableViewCell.m in Sources */,
+				6A75CC8122DAAF4200F45D45 /* WeatherDetailViewController.m in Sources */,
 				5E0CBE3222DA44DC00DC17FD /* FishListViewController.m in Sources */,
 				E37855B122D9EAEC003114FD /* Mark.m in Sources */,
 				6A75CC7322DA830800F45D45 /* WeatherViewModel.m in Sources */,
@@ -304,6 +333,7 @@
 				6AB238E922D92FAE00568D89 /* MapViewController.m in Sources */,
 				6A75CC7B22DA906500F45D45 /* LocationMarkCell.m in Sources */,
 				5E380D4122DA589F00F39B51 /* FishModel.m in Sources */,
+				6A75CC8822DAB2F500F45D45 /* WeatherDetailViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
