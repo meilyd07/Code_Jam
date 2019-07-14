@@ -34,7 +34,8 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
                       [[WeatherSection alloc] init: fishSection items:@[@(fishesList)]]
                       
                       ];
-    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     [self.tableView reloadData];
 }
 
