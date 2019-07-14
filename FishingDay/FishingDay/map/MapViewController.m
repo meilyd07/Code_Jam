@@ -28,8 +28,6 @@ NSString * const annotationReuseId = @"annotation";
 - (void)loadView {
     [super loadView];
     
-    self.tabBarController.tabBar.translucent = YES;
-    
     [self initLocationManager];
     [self initMap];
     [self initMarksWithSubscription];
