@@ -22,8 +22,8 @@ NSString * const marksDataKey = @"marksDataKey";
     self.details = [coder decodeObjectOfClass:[NSString class] forKey:@"details"];
     self.photo = [coder decodeObjectOfClass:[UIImage class] forKey:@"photo"];
     
-    CLLocationDegrees latitude = [coder decodeDoubleForKey:@"latitude"];
-    CLLocationDegrees longitude = [coder decodeDoubleForKey:@"longitude"];
+//    CLLocationDegrees latitude = [coder decodeDoubleForKey:@"latitude"];
+//    CLLocationDegrees longitude = [coder decodeDoubleForKey:@"longitude"];
     self.location = CLLocationCoordinate2DMake(latitude, longitude);
     
     return self;
