@@ -13,5 +13,12 @@
 @property (strong, nonatomic) Mark *mark;
 //@property (assign, nonatomic) NSInteger row;
 - (id)initWithMark:(Mark *)mark;
+-(NSString *)getWindDirectionValue;
+-(NSString *)getWindSpeedValue;
+-(NSString *)getTemperatureValue;
+-(NSString *)getMinTemperatureValue;
+-(NSString *)getMaxTemperatureValue;
+-(NSString *)getAtmosphericPressureValue;
+-(NSString *)getHumidityValue;
 @end
 

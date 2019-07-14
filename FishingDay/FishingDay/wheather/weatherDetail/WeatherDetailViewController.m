@@ -53,18 +53,34 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
         markCell = (LocationMarkCell *)[nibs objectAtIndex:0];
     }
 
+    [markCell.buttonInfo setHidden:YES];
+    
     WeatherSection *section = (WeatherSection *)self.sections[indexPath.section];
     enum WeatherItem current = [section.items[indexPath.row] integerValue];
-    
     switch (current) {
         case windDeg:
-            markCell.markTitle.text = @"Направление ветра, градусы:";
+            markCell.markTitle.text = [NSString stringWithFormat:@"Направление ветра, градусы: %@", self.viewModel.getWindDirectionValue];
             break;
         case windSpeed:
-            markCell.markTitle.text = @"Скорость ветра, м/с:";
+            markCell.markTitle.text = [NSString stringWithFormat:@"Скорость ветра, м/с: %@", self.viewModel.getWindSpeedValue];
+            break;
+        case temperature:
+            markCell.markTitle.text = [NSString stringWithFormat:@"Температура, C: %@", self.viewModel.getTemperatureValue];
+            break;
+        case pressure:
+            markCell.markTitle.text = [NSString stringWithFormat:@"Атмосферное давление, мм.р.с.: %@", self.viewModel.getAtmosphericPressureValue];
+            break;
+        case humidity:
+            markCell.markTitle.text = [NSString stringWithFormat:@"Влажность, процент: %@", self.viewModel.getHumidityValue];
+            break;
+        case tempMin:
+            markCell.markTitle.text = [NSString stringWithFormat:@"Минимальная температура, C: %@", self.viewModel.getMinTemperatureValue];
+            break;
+        case tempMax:
+            markCell.markTitle.text = [NSString stringWithFormat:@"Максимальная температура, C: %@", self.viewModel.getMaxTemperatureValue];
             break;
         default:
-            markCell.markTitle.text = @"";
+            break;
     }
     return markCell;
 }

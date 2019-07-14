@@ -51,6 +51,7 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
+                <outlet property="buttonInfo" destination="lnk-FJ-kGT" id="AXq-GM-IOw"/>
                 <outlet property="markTitle" destination="wGZ-yO-3RX" id="N09-Op-Vax"/>
             </connections>
         </tableViewCell>
