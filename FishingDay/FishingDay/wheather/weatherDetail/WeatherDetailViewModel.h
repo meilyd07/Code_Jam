@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Mark.h"
 
 @interface WeatherDetailViewModel : NSObject
-
+@property (strong, nonatomic) Mark *mark;
+//@property (assign, nonatomic) NSInteger row;
+- (id)initWithMark:(Mark *)mark;
 @end
 
