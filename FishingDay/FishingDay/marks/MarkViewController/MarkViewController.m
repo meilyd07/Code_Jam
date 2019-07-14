@@ -13,12 +13,15 @@ NSString * const markChangedNotification = @"markChangedNotification";
 
 @interface MarkViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIButton *photoButton;
+@property (weak, nonatomic) IBOutlet UIButton *deletePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextField *detailsTextField;
-@property (weak, nonatomic) IBOutlet UIButton *addPhotoButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewBottomConstraint;
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
 
 @end
@@ -27,30 +30,38 @@ NSString * const markChangedNotification = @"markChangedNotification";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.imagePickerController = [UIImagePickerController new];
+    self.imagePickerController.delegate = self;
     if (self.mark) {
-        self.addPhotoButton.hidden = YES;
-        self.photoImageView.image = self.mark.photo;
+        if (self.mark.photo) {
+            [self.photoButton setTitle:@"Изменить фото" forState:UIControlStateNormal];
+            self.deletePhotoButton.hidden = NO;
+            self.photoImageView.hidden = NO;
+            self.photoImageView.image = self.mark.photo;
+        }
         self.titleTextField.text = self.mark.title;
         self.detailsTextField.text = self.mark.details;
-        //set location from mark
+        MKCoordinateRegion region = MKCoordinateRegionMake(self.mark.location, MKCoordinateSpanMake(0.1, 0.1));
+        MKPointAnnotation *annotation = [MKPointAnnotation new];
+        annotation.coordinate = self.mark.location;
+        [self.mapView addAnnotation:annotation];
+        self.mapView.region = region;
     } else {
-        self.photoImageView.hidden = YES;
         self.mark = [Mark new];
         //set current location
-        self.imagePickerController = [UIImagePickerController new];
     }
-    [self.saveButton addTarget:self action:@selector(onSaveButton) forControlEvents:UIControlEventTouchUpInside];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
-- (void)onSaveButton {
-    if (!self.titleTextField.text) {
+- (IBAction)onSaveButton:(UIButton *)sender {
+    if (self.titleTextField.text.length == 0) {
         [self.navigationController popViewControllerAnimated:YES];
+        return;
     }
     self.mark.title = self.titleTextField.text;
     self.mark.details = self.detailsTextField.text;
-    if (!self.mark.photo) {
-        self.mark.photo = [UIImage imageNamed:@"noPhoto"];
-    }
+    self.mark.photo = self.photoImageView.image;
     [[NSNotificationCenter defaultCenter] postNotificationName:markChangedNotification object:self];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -78,7 +89,7 @@ NSString * const markChangedNotification = @"markChangedNotification";
         self.imagePickerController.allowsEditing = NO;
         [self presentViewController:self.imagePickerController animated:YES completion:nil];
     } else {
-        UIAlertController *noCameraAlert = [UIAlertController alertControllerWithTitle:@"Warning" message:@"You don't have camera" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *noCameraAlert = [UIAlertController alertControllerWithTitle:@"Внимание!" message:@"Не удаётся найти камеру" preferredStyle:UIAlertControllerStyleAlert];
         [noCameraAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:noCameraAlert animated:YES completion:nil];
     }
@@ -88,6 +99,57 @@ NSString * const markChangedNotification = @"markChangedNotification";
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     self.imagePickerController.allowsEditing = NO;
     [self presentViewController:self.imagePickerController animated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    if (image) {
+        [self.photoButton setTitle:@"Изменить фото" forState:UIControlStateNormal];
+        self.photoImageView.hidden = NO;
+        self.deletePhotoButton.hidden = NO;
+        self.photoImageView.image = image;
+    }
+}
+
+- (IBAction)onDeletePhotoButton:(UIButton *)sender {
+    self.photoImageView.image = nil;
+    self.photoImageView.hidden = YES;
+    self.deletePhotoButton.hidden = YES;
+    [self.photoButton setTitle:@"Добавить фото" forState:UIControlStateNormal];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    self.scrollViewBottomConstraint.constant = keyboardFrame.size.height;
+    UIViewAnimationOptions animationCurve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    CGFloat duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    [UIView animateWithDuration:duration delay:0.0 options:animationCurve animations:^{
+        [self.view layoutIfNeeded];
+    } completion:nil];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    self.scrollViewBottomConstraint.constant = 15;
+    UIViewAnimationOptions animationCurve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    CGFloat duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    [UIView animateWithDuration:duration delay:0.0 options:animationCurve animations:^{
+        [self.view layoutIfNeeded];
+    } completion:nil];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

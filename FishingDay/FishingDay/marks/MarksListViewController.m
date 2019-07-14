@@ -57,9 +57,11 @@ NSString * const markCellId = @"markCellId";
         NSMutableArray *tempMarks = [NSMutableArray array];
         for (int i = 0; i < 5; i++) {
             Mark *mark = [Mark new];
-            mark.photo = [UIImage imageNamed:@"noPhoto"];
             mark.title = [NSString stringWithFormat:@"Mark %d", i + 1];
             mark.details = @"aaaaaaaaaaaaaaaaaa";
+            mark.latitude = 53.9615398 + i/20.0;
+            mark.longitude = 27.3475244 + i/20.0;
+            mark.location = CLLocationCoordinate2DMake(mark.latitude, mark.longitude);
             [tempMarks addObject:mark];
         }
         self.marks = tempMarks;
@@ -86,7 +88,11 @@ NSString * const markCellId = @"markCellId";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MarkTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:markCellId forIndexPath:indexPath];
     Mark *mark = self.marks[indexPath.row];
-    cell.photoImageView.image = mark.photo;
+    if (!mark.photo) {
+        cell.photoImageView.image = [UIImage imageNamed:@"noPhoto"];
+    } else {
+        cell.photoImageView.image = mark.photo;
+    }
     cell.titleLabel.text = mark.title;
     cell.fishTypesLabel.text = mark.details;
     return cell;
@@ -107,11 +113,8 @@ NSString * const markCellId = @"markCellId";
         NSMutableArray *marks = [self mutableArrayValueForKey:@"marks"];
         [marks removeObjectAtIndex:indexPath.row];
         [self saveData];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
-}
-
-- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView reloadData];
 }
 
 - (void)markChanged:(NSNotification *)notification {
@@ -133,7 +136,10 @@ NSString * const markCellId = @"markCellId";
 }
 
 - (void)saveData {
-    NSData *marksData = [NSKeyedArchiver archivedDataWithRootObject:self.marks requiringSecureCoding:NO error:nil];
+    NSData *marksData;
+    if (self.marks.count != 0) {
+        marksData = [NSKeyedArchiver archivedDataWithRootObject:self.marks requiringSecureCoding:NO error:nil];
+    }
     [[NSUserDefaults standardUserDefaults] setObject:marksData forKey:marksDataKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
