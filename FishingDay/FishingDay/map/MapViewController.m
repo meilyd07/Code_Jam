@@ -68,21 +68,11 @@ NSString * const annotationReuseId = @"annotation";
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectZero];
     self.mapView.translatesAutoresizingMaskIntoConstraints = NO;
     self.mapView.delegate = self;
-    
     [self.mapView registerClass:[MKAnnotationView class] forAnnotationViewWithReuseIdentifier:annotationReuseId];
-    
     [self zoomMap:self.mapView byDelta:0.00003f];
     
-//    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-//    longPressGesture.minimumPressDuration = 0.5f;
-//    longPressGesture.delegate = self;
-    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-//    [tapGesture shouldRequireFailureOfGestureRecognizer:longPressGesture];
-//    tapGesture.delegate = self;
-    
     [self.mapView addGestureRecognizer:tapGesture];
-//    [self.mapView addGestureRecognizer:longPressGesture];
 
     [self.view addSubview:self.mapView];
     
