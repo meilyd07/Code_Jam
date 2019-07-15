@@ -34,25 +34,39 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
     if(self.fish)
     {
         self.nameTextfield.text = self.fish.nameFish;
-        self.minTempTextField.text = [self.fish.minTemperature stringValue];
-         self.maxTempTextField.text = [self.fish.maxTemperature stringValue];
+        self.minTempTextField.text = [self.fish.maxTemperature stringValue];
+         self.maxTempTextField.text = [self.fish.minTemperature stringValue];
         self.urrTextField.text = self.fish.imageUrl;
         self.descriptionTextvVew.text = self.fish.descriptionFish;
+        
     }
     else {
         self.fish = [FishModel new];
-        //self.mark.location =
+        
     }
-    
+    self.maxTempTextField.delegate=self;
+    self.minTempTextField.delegate=self;
      [self.saveBtn addTarget:self action:@selector(onSaveButton) forControlEvents:UIControlEventTouchUpInside];
     // Do any additional setup after loading the view from its nib.
 }
 
 
 - (void)onSaveButton {
+    if([self.nameTextfield.text isEqualToString:@""]){
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Сохранение невозможно"
+                                                                       message:@"Поле <Название рыбы> не может быть пустым"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
     self.fish.nameFish = self.nameTextfield.text;
-    self.fish.minTemperature = [NSNumber numberWithFloat: [self.minTempTextField.text floatValue]];
-    self.fish.maxTemperature = [NSNumber numberWithFloat: [self.maxTempTextField.text floatValue]];
+    self.fish.maxTemperature = [NSNumber numberWithFloat: [self.minTempTextField.text floatValue]];
+    self.fish.minTemperature = [NSNumber numberWithFloat: [self.maxTempTextField.text floatValue]];
     self.fish.imageUrl=self.urrTextField.text;
     self.fish.descriptionFish = self.descriptionTextvVew.text;
     [[NSNotificationCenter defaultCenter] postNotificationName:fishChangedNotification object:self];
@@ -74,6 +88,11 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
         [self.navigationController popViewControllerAnimated:YES];
     }];
     
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string  {
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890+"] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
 }
 
 /*
