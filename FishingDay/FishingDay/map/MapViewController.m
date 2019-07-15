@@ -188,7 +188,7 @@ NSString * const annotationReuseId = @"annotation";
             UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Delete"
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * action) {
-
+                                                           
                                                            [marks removeObjectAtIndex:index];
                                                            [safeSelf saveData];
                                                        }];
@@ -223,13 +223,16 @@ NSString * const annotationReuseId = @"annotation";
         UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Add"
                                                      style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
+                                                       NSString *titleText = alert.textFields[0].text;
                                                        
-                                                       Mark *mark = [[Mark alloc] init];
-                                                       mark.title = alert.textFields[0].text;
-                                                       mark.location = coordingate;
-                                                       
-                                                       [marks addObject:mark]; // Do I Really need safe?
-                                                       [safeSelf saveData];
+                                                       if (titleText.length) {
+                                                           Mark *mark = [[Mark alloc] init];
+                                                           mark.title = titleText;
+                                                           mark.location = coordingate;
+                                                           
+                                                           [marks addObject:mark]; // Do I Really need safe?
+                                                           [safeSelf saveData];
+                                                       }
                                                    }];
         
         UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
