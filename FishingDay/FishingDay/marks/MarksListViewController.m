@@ -192,6 +192,7 @@ NSString * const markCellId = @"markCellId";
     mark.details = markVC.mark.details;
     mark.photo = markVC.mark.photo;
     mark.location = markVC.mark.location;
+    mark.fishId = markVC.mark.fishId;
     [self.tableView reloadData];
     [self saveData];
 }

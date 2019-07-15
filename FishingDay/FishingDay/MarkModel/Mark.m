@@ -22,6 +22,8 @@ NSString * const marksDataKey = @"marksDataKey";
     self.title = [coder decodeObjectOfClass:[NSString class] forKey:@"title"];
     self.details = [coder decodeObjectOfClass:[NSString class] forKey:@"details"];
     self.photo = [coder decodeObjectOfClass:[UIImage class] forKey:@"photo"];
+    NSSet *classes = [NSSet setWithArray:@[[NSArray class], [NSNumber class]]];
+    self.fishId = [coder decodeObjectOfClasses:classes forKey:@"fishId"];
     
     return self;
 }
@@ -33,6 +35,7 @@ NSString * const marksDataKey = @"marksDataKey";
     [coder encodeObject:self.title forKey:@"title"];
     [coder encodeObject:self.details forKey:@"details"];
     [coder encodeObject:self.photo forKey:@"photo"];
+    [coder encodeObject:self.fishId forKey:@"fishId"];
 }
 
 + (BOOL)supportsSecureCoding {

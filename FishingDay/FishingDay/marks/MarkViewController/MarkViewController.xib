@@ -12,12 +12,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MarkViewController">
             <connections>
+                <outlet property="addFishButton" destination="GJT-uE-d01" id="MfP-AW-ALS"/>
                 <outlet property="deletePhotoButton" destination="3gg-mh-M0Q" id="z2D-0P-0Tc"/>
-                <outlet property="detailsTextField" destination="CLD-2K-Ncn" id="Drm-pm-1aa"/>
                 <outlet property="mapView" destination="ijj-Rb-Oq9" id="5lr-Ky-F6T"/>
                 <outlet property="photoButton" destination="eQZ-BG-dbN" id="XHx-p3-rcs"/>
                 <outlet property="photoImageView" destination="Ur6-zL-OKf" id="6Oj-X9-W8M"/>
-                <outlet property="scrollView" destination="7QE-mW-UZf" id="TYp-Ya-Icj"/>
+                <outlet property="pickerTextField" destination="kgk-lL-wnD" id="mEt-7i-DHr"/>
+                <outlet property="removeFishButton" destination="oBa-ac-0hO" id="eWY-Me-zyJ"/>
                 <outlet property="scrollViewBottomConstraint" destination="Ir7-UE-FVg" id="Olz-us-J5R"/>
                 <outlet property="titleTextField" destination="b16-am-Xcx" id="L4H-0e-H5N"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -59,7 +60,7 @@
                                         </button>
                                     </subviews>
                                 </stackView>
-                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ijj-Rb-Oq9">
+                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijj-Rb-Oq9">
                                     <rect key="frame" x="0.0" y="40" width="290" height="150"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="150" id="prB-lQ-TUd"/>
@@ -83,19 +84,47 @@
                                         <outlet property="delegate" destination="-1" id="yTv-tj-Tfn"/>
                                     </connections>
                                 </textField>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Виды рыбы:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjR-qp-X5N">
+                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Rg7-wq-4VU">
                                     <rect key="frame" x="0.0" y="270.5" width="290" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CLD-2K-Ncn">
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Виды рыбы:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TjR-qp-X5N">
+                                            <rect key="frame" x="0.0" y="0.0" width="230" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJT-uE-d01">
+                                            <rect key="frame" x="240" y="0.0" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="Kfl-tB-Xdf"/>
+                                                <constraint firstAttribute="width" constant="20" id="VP6-z9-75c"/>
+                                            </constraints>
+                                            <state key="normal" image="plusIcon"/>
+                                            <connections>
+                                                <action selector="onAddFishButton:" destination="-1" eventType="touchUpInside" id="66P-KU-wkV"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBa-ac-0hO">
+                                            <rect key="frame" x="270" y="0.0" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="CaW-lL-Zz4"/>
+                                                <constraint firstAttribute="width" constant="20" id="EJ7-Cf-63N"/>
+                                            </constraints>
+                                            <state key="normal" image="minusIcon"/>
+                                            <connections>
+                                                <action selector="onRemoveFishButton:" destination="-1" eventType="touchUpInside" id="dcb-Za-rGZ"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kgk-lL-wnD">
                                     <rect key="frame" x="0.0" y="301" width="290" height="30"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <textInputTraits key="textInputTraits"/>
                                     <connections>
-                                        <outlet property="delegate" destination="-1" id="rik-3T-FCS"/>
+                                        <outlet property="delegate" destination="-1" id="asj-wb-ZGX"/>
                                     </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57v-mj-ARK">
@@ -108,10 +137,10 @@
                             </subviews>
                             <constraints>
                                 <constraint firstItem="Ur6-zL-OKf" firstAttribute="width" secondItem="gdN-9I-nHk" secondAttribute="width" id="EXy-Pf-Crw"/>
+                                <constraint firstItem="kgk-lL-wnD" firstAttribute="width" secondItem="gdN-9I-nHk" secondAttribute="width" id="Qra-k3-MFS"/>
                                 <constraint firstItem="UqB-EE-Kiv" firstAttribute="width" secondItem="gdN-9I-nHk" secondAttribute="width" id="S7D-Wp-gh4"/>
                                 <constraint firstItem="b16-am-Xcx" firstAttribute="width" secondItem="gdN-9I-nHk" secondAttribute="width" id="T6X-x0-ImL"/>
-                                <constraint firstItem="CLD-2K-Ncn" firstAttribute="width" secondItem="gdN-9I-nHk" secondAttribute="width" id="WUN-PY-mQA"/>
-                                <constraint firstItem="TjR-qp-X5N" firstAttribute="width" secondItem="gdN-9I-nHk" secondAttribute="width" id="bsw-by-stD"/>
+                                <constraint firstItem="Rg7-wq-4VU" firstAttribute="width" secondItem="gdN-9I-nHk" secondAttribute="width" id="cuG-Xp-BvI"/>
                                 <constraint firstItem="ijj-Rb-Oq9" firstAttribute="width" secondItem="gdN-9I-nHk" secondAttribute="width" id="e9E-7i-RRN"/>
                                 <constraint firstItem="qhu-BX-b4a" firstAttribute="width" secondItem="gdN-9I-nHk" secondAttribute="width" id="q5y-OM-oll"/>
                             </constraints>
@@ -137,4 +166,8 @@
             <point key="canvasLocation" x="137.68115942028987" y="128.57142857142856"/>
         </view>
     </objects>
+    <resources>
+        <image name="minusIcon" width="512" height="512"/>
+        <image name="plusIcon" width="512" height="512"/>
+    </resources>
 </document>
