@@ -178,14 +178,14 @@ NSString * const annotationReuseId = @"annotation";
                 }
             }
             
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Do you want to delete this Mark?"
-                                                                           message:[NSString stringWithFormat:@"Title: %@", mark.title]
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Хотите удалить метку?"
+                                                                           message:[NSString stringWithFormat:@"Название: %@", mark.title]
                                                                     preferredStyle:UIAlertControllerStyleAlert];
 
             NSMutableArray __weak *marks = self.marks;
             __block MapViewController *safeSelf = self;
 
-            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Delete"
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Удалить"
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * action) {
                                                            
@@ -193,7 +193,7 @@ NSString * const annotationReuseId = @"annotation";
                                                            [safeSelf saveData];
                                                        }];
 
-            UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+            UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleDefault
                                                            handler:nil];
 
             [alert addAction:ok];
@@ -213,14 +213,14 @@ NSString * const annotationReuseId = @"annotation";
     } else {
         CLLocationCoordinate2D coordingate = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add mark with Title: "
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Добавьте метку: "
                                                                        message:nil
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
         NSMutableArray __weak *marks = self.marks;
         __block MapViewController *safeSelf = self;
         
-        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Add"
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Добавить"
                                                      style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        NSString *titleText = alert.textFields[0].text;
@@ -235,11 +235,11 @@ NSString * const annotationReuseId = @"annotation";
                                                        }
                                                    }];
         
-        UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+        UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleDefault
                                                        handler:nil];
         
         [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            textField.placeholder = @"Title";
+            textField.placeholder = @"Название";
             textField.keyboardType = UIKeyboardTypeDefault;
         }];
         
@@ -256,13 +256,13 @@ NSString * const annotationReuseId = @"annotation";
         || status == kCLAuthorizationStatusAuthorizedWhenInUse){
         
         CLLocation *location = [self.locationManager location];
-        [self.mapView setCenterCoordinate:[location coordinate] animated:YES];
+        [self.mapView setCenterCoordinate:[location coordinate] animated:NO];
     }
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     CLLocation *location = [self.locationManager location];
-    [self.mapView setCenterCoordinate:[location coordinate] animated:YES];
+    [self.mapView setCenterCoordinate:[location coordinate] animated:NO];
 }
 
 #pragma mark - KVO
