@@ -18,5 +18,6 @@ extern NSString * const marksDataKey;
 @property (strong, nonatomic) UIImage *photo;
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *details;
+@property (copy, nonatomic) NSArray *fishId;
 
 @end
