@@ -20,9 +20,9 @@ NSString * const fishesDataKey = @"fishesDataKey";
     self.idFish = [coder decodeObjectOfClass:[NSNumber class] forKey:@"idFish"];
     self.nameFish = [coder decodeObjectOfClass:[NSString class] forKey:@"nameFish"];
     self.imageUrl = [coder decodeObjectOfClass:[NSString class] forKey:@"imageUrl"];
-    self.minTemperature = [coder decodeObjectOfClass:[NSNumber class] forKey:@"minTemperature"];
-     self.maxTemperature = [coder decodeObjectOfClass:[NSNumber class] forKey:@"maxTemperature"];
-    self.descriptionFish = [coder decodeObjectOfClass:[NSNumber class] forKey:@"descriptionFish"];
+    self.maxTemperature = [coder decodeObjectOfClass:[NSNumber class] forKey:@"minTemperature"];
+     self.minTemperature = [coder decodeObjectOfClass:[NSNumber class] forKey:@"maxTemperature"];
+    self.descriptionFish = [coder decodeObjectOfClass:[NSString class] forKey:@"descriptionFish"];
     return self;
 }
 
@@ -31,8 +31,8 @@ NSString * const fishesDataKey = @"fishesDataKey";
     [coder encodeObject:self.idFish forKey:@"idFish"];
     [coder encodeObject:self.nameFish forKey:@"nameFish"];
     [coder encodeObject:self.imageUrl forKey:@"imageUrl"];
-     [coder encodeObject:self.minTemperature forKey:@"minTemperature"];
-     [coder encodeObject:self.maxTemperature forKey:@"maxTemperature"];
+     [coder encodeObject:self.maxTemperature forKey:@"minTemperature"];
+     [coder encodeObject:self.minTemperature forKey:@"maxTemperature"];
     [coder encodeObject:self.descriptionFish forKey:@"descriptionFish"];
 }
 

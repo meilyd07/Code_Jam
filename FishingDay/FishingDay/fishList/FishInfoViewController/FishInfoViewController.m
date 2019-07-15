@@ -57,8 +57,8 @@
    // self.fishNameLabel = lab;
     self.fishNameLabel.text = self.fish.nameFish;
     self.fishNameLabel.textColor = [UIColor blackColor];
-    self.fishMinLabel.text = [self.fish.maxTemperature stringValue];
-    self.fishMaxLabel.text =[self.fish.minTemperature stringValue];
+    self.fishMinLabel.text = [self.fish.minTemperature stringValue];
+    self.fishMaxLabel.text =[self.fish.maxTemperature stringValue];
     self.fishTextView.text = self.fish.descriptionFish;
     
    // self.d

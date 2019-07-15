@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aWw-Nb-pcG">
-                    <rect key="frame" x="0.0" y="35" width="375" height="632"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="макс" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wvo-75-1aj" userLabel="fishMax">
                             <rect key="frame" x="200.5" y="391" width="39.5" height="20.5"/>
@@ -138,7 +138,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="aWw-Nb-pcG" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="fea-E1-ezH"/>
-                <constraint firstItem="aWw-Nb-pcG" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="15" id="iVi-Zf-nsm"/>
+                <constraint firstItem="aWw-Nb-pcG" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="iVi-Zf-nsm"/>
                 <constraint firstItem="aWw-Nb-pcG" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="iir-aI-vlv"/>
                 <constraint firstItem="aWw-Nb-pcG" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="k2k-en-aAv"/>
             </constraints>

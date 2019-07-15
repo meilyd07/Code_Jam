@@ -41,9 +41,15 @@ NSString * const cellReuseId = @"cellReuseId";
       NSData *marksData = [[NSUserDefaults standardUserDefaults] objectForKey:fishesDataKey];
         if (!marksData) {
            
-            NSArray *imageUrls = @[@"http://fishingclub.by/templates/Pisces/images/fish_book/belij_amur.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/422.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/6.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/2.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/167.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/195.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/259.jpg", @"http://lookw.ru/1/519/1402242484-064.jpg"];
+            NSArray *imageUrls = @[@"http://fishingclub.by/templates/Pisces/images/fish_book/128.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/193.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/152.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/145.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/525.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/210.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/122.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/112.gif",
+                @"http://fishingclub.by/templates/Pisces/images/fish_book/132.jpg",
+                @"http://fishingclub.by/templates/Pisces/images/fish_book/161.jpg"];
             
-            NSArray *namesOfFishes =@[@"рыба1", @"рыба2", @"рыба3", @"рыба4", @"рыба5", @"рыба6", @"рыба7", @"рыба8"];
+            NSArray *namesOfFishes =@[@"Окунь", @"Судак", @"Щука", @"Налим", @"Форель", @"Карп", @"Лещ", @"Карась",@"Плотва",@"Сом"];
+            NSArray *arrMin = @[@18,@12,@15,@5,@10,@22,@18,@20,@12,@20,];
+             NSArray *arrMax = @[@20,@18,@16,@6,@12,@28,@20,@28,@18,@28,];
+            
+            
             NSString *str =@"feieiofjneoinfeoifneoifneoifnjeoijfeoijfeoijfoejfeoijfeoifjeofjeoifjeoifjeoifjirnjrenfjenfeinfeinfeiojfehgwephguwehgpehgoheoihgoeigheogheowhrowhwoinvcoweinhfoierhg[weohgwe[ohnq'ihwpeorghwe[goihwe[ihgrwe[goihwg[wihgw[gihw[ihg[wihgw[ighw[whgwghwg";
             
             NSMutableArray *arr = [NSMutableArray new];
@@ -52,6 +58,9 @@ NSString * const cellReuseId = @"cellReuseId";
                 model.idFish= [NSNumber numberWithInt:i];
                 model.imageUrl=imageUrls[i];
                 model.nameFish = namesOfFishes[i];
+                model.maxTemperature= arrMax[i];
+                model.minTemperature = arrMin[i];
+                
                 model.descriptionFish=str;
                 [arr addObject:model];
             }
@@ -214,8 +223,8 @@ NSString * const cellReuseId = @"cellReuseId";
         NSMutableArray *fishes = [self mutableArrayValueForKey:@"fishesAr"];
         fish.idFish = [NSNumber numberWithInt: fishes.count];
         fish.nameFish = fishVC.fish.nameFish;
-        fish.maxTemperature= fishVC.fish.maxTemperature;
-        fish.minTemperature = fishVC.fish.minTemperature;
+        fish.minTemperature= fishVC.fish.minTemperature;
+        fish.maxTemperature = fishVC.fish.maxTemperature;
         fish.descriptionFish = fishVC.fish.descriptionFish;
         [fishes addObject:fish];
         
