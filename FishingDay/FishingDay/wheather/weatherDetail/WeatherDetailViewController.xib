@@ -40,9 +40,13 @@
                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Благоприятно вылавливать сома в водоеме" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bI-cY-R0o">
-                    <rect key="frame" x="23" y="606" width="367" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bI-cY-R0o">
+                    <rect key="frame" x="23" y="596" width="367" height="200.5"/>
+                    <mutableString key="text">При резком снижении атмосферного давления практически вся рыба становится неактивной.
+Донная хищная рыба с повышением давления снижает свою активность. Сом и налим затихают. Щука тоже становится вялой. Зато с понижением давления хищная рыба активизируется — она использует вялость белой для удачной охоты. Становятся подвижными дневной судак, сом, налим, крупный окунь и щука.
+Если атмосферное давление растет, лещ, густера, чехонь, язь, голавль и жерех становятся активными. Также становится более буйным окунь, особенно молодой. С понижением давления эти виды становятся вялыми.
+Судак — одна из немногих рыб, которые практически не реагируют на изменения атмосферного давления.</mutableString>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.0099924857820000001" green="0.2774782019" blue="0.43139426180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -50,7 +54,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="HOV-qt-ABl" firstAttribute="top" secondItem="498-Jo-IvT" secondAttribute="bottom" constant="40" id="65c-Ie-p9s"/>
-                <constraint firstItem="0bI-cY-R0o" firstAttribute="top" secondItem="HOV-qt-ABl" secondAttribute="bottom" constant="20" id="6Pu-Xz-ZFu"/>
+                <constraint firstItem="0bI-cY-R0o" firstAttribute="top" secondItem="HOV-qt-ABl" secondAttribute="bottom" constant="10" id="6Pu-Xz-ZFu"/>
                 <constraint firstItem="VlO-Zk-XQ1" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="23" id="GkU-zh-dPH"/>
                 <constraint firstItem="0bI-cY-R0o" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="23" id="M8n-7E-AgI"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="0bI-cY-R0o" secondAttribute="trailing" constant="24" id="WGH-B6-IIE"/>

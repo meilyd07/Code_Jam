@@ -23,22 +23,41 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
     [super viewDidLoad];
     [self.viewModel getWeatherData:^{
         dispatch_async(dispatch_get_main_queue(), ^{
+            
+            self.sections = @[
+                              [[WeatherSection alloc] init: temperatureSection items:@[
+                                                                                       @(temperature),
+                                                                                       @(tempMax),
+                                                                                       @(tempMin),
+                                                                                       @(pressure),
+                                                                                       @(humidity),
+                                                                                       @(windSpeed),
+                                                                                       @(windSpeed)
+                                                                                       ]],
+                              [[WeatherSection alloc] init: temperatureSection items:@[
+                                                                                       @(temperature),
+                                                                                       @(tempMax),
+                                                                                       @(tempMin),
+                                                                                       @(pressure),
+                                                                                       @(humidity),
+                                                                                       @(windSpeed),
+                                                                                       @(windSpeed)
+                                                                                       ]],
+                              [[WeatherSection alloc] init: temperatureSection items:@[
+                                                                                       @(temperature),
+                                                                                       @(tempMax),
+                                                                                       @(tempMin),
+                                                                                       @(pressure),
+                                                                                       @(humidity),
+                                                                                       @(windSpeed),
+                                                                                       @(windSpeed)
+                                                                                       ]]
+                              ];
             [self.tableView reloadData];
         });
     }];
-    self.sections = @[
-                      [[WeatherSection alloc] init: temperatureSection items:@[
-                                           @(temperature),
-                                           @(tempMax),
-                                           @(tempMin)
-                                           ]],
-                      [[WeatherSection alloc] init: pressureAndHumiditySection items:@[@(pressure), @(humidity)]],
-                      [[WeatherSection alloc] init: windSection items:@[@(windSpeed),
-                                                                        @(windDeg)]],
-                      ];
-    self.tableView.delegate = self;
+        self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self.tableView reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -63,26 +82,23 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
     WeatherSection *section = (WeatherSection *)self.sections[indexPath.section];
     enum WeatherItem current = [section.items[indexPath.row] integerValue];
     switch (current) {
-        case windDeg:
-            markCell.markTitle.text = [NSString stringWithFormat:@"Направление ветра, градусы: %@", self.viewModel.getWindDirectionValue];
-            break;
         case windSpeed:
-            markCell.markTitle.text = [NSString stringWithFormat:@"Скорость ветра, м/с: %@", self.viewModel.getWindSpeedValue];
+            markCell.markTitle.text = [NSString stringWithFormat:@"Скорость ветра, м/с: %@", [self.viewModel getWindSpeedValue:indexPath.section]];
             break;
         case temperature:
-            markCell.markTitle.text = [NSString stringWithFormat:@"Температура, C: %@", self.viewModel.getTemperatureValue];
+            markCell.markTitle.text = [NSString stringWithFormat:@"Температура, C: %@", [self.viewModel getTemperatureValue:indexPath.section]];
             break;
         case pressure:
-            markCell.markTitle.text = [NSString stringWithFormat:@"Атмосферное давление, мм.р.с.: %@", self.viewModel.getAtmosphericPressureValue];
+            markCell.markTitle.text = [NSString stringWithFormat:@"Атмосферное давление, гПа: %@", [self.viewModel getAtmosphericPressureValue:indexPath.section]];
             break;
         case humidity:
-            markCell.markTitle.text = [NSString stringWithFormat:@"Влажность, процент: %@", self.viewModel.getHumidityValue];
+            markCell.markTitle.text = [NSString stringWithFormat:@"Влажность, %%: %@", [self.viewModel getHumidityValue:indexPath.section]];
             break;
         case tempMin:
-            markCell.markTitle.text = [NSString stringWithFormat:@"Минимальная температура, C: %@", self.viewModel.getMinTemperatureValue];
+            markCell.markTitle.text = [NSString stringWithFormat:@"Минимальная температура, C: %@", [self.viewModel getMinTemperatureValue:indexPath.section]];
             break;
         case tempMax:
-            markCell.markTitle.text = [NSString stringWithFormat:@"Максимальная температура, C: %@", self.viewModel.getMaxTemperatureValue];
+            markCell.markTitle.text = [NSString stringWithFormat:@"Максимальная температура, C: %@", [self.viewModel getMaxTemperatureValue:indexPath.section]];
             break;
         default:
             break;
@@ -94,14 +110,24 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
     NSUInteger current = ((WeatherSection *)self.sections[section]).type;
     switch (current) {
     case temperatureSection:
-            return @"Температура:";
-    case pressureAndHumiditySection:
-            return @"Атм. давление и влажность";
-    case windSection:
-            return @"Параметры ветра";
+            return [NSString stringWithFormat:@"Погода на: %@", [self.viewModel getDateValue:section]];
     default:
             return @"";
     }
+//    switch (section) {
+//        case 0:
+//            return @"Погода сегодня";
+//            break;
+//        case 1:
+//            return @"Погода завтра";
+//            break;
+//        case 2:
+//            return @"Погода послезавтра";
+//            break;
+//        default:
+//            return @"";
+//            break;
+//    }
 }
 
 @end

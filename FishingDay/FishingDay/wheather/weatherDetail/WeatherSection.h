@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 
 enum WeatherSectionType:NSUInteger {
-    temperatureSection,
-    pressureAndHumiditySection,
-    windSection
+    temperatureSection
 };
 
 enum WeatherItem:NSUInteger {

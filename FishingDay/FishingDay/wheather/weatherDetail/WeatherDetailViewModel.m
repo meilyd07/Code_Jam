@@ -33,7 +33,6 @@
          NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
          
          for (NSDictionary *list in [json objectForKey:@"list"]) {
-             //NSString *name = [responseDictionary objectForKey:@"username"];
              WeatherModel *weatherModel = [[WeatherModel alloc] init];
              NSDictionary *main = [list objectForKey:@"main"];
              NSDictionary *wind = [list objectForKey:@"wind"];
@@ -53,37 +52,35 @@
              weatherModel.speed = windSpeed;
              [self.weatherModelsArray addObject:weatherModel];
          }
-         
-         //NSLog(@"%@", json);
          getCompletion();
      }];
 }
 
--(NSString *)getWindDirectionValue {
-    return @"76";
+-(NSString *)getDateValue:(NSInteger)row {
+    return ((WeatherModel *)self.weatherModelsArray[row]).dateString;
 }
 
--(NSString *)getWindSpeedValue {
-    return @"15";
+-(NSString *)getWindSpeedValue:(NSInteger)row {
+    return ((WeatherModel *)self.weatherModelsArray[row]).speed;
 }
 
--(NSString *)getTemperatureValue {
-    return @"45";
+-(NSString *)getTemperatureValue:(NSInteger)row {
+    return ((WeatherModel *)self.weatherModelsArray[row]).temperature;
 }
 
--(NSString *)getMinTemperatureValue {
-    return @"77";
+-(NSString *)getMinTemperatureValue:(NSInteger)row {
+    return ((WeatherModel *)self.weatherModelsArray[row]).tempMin;
 }
 
--(NSString *)getMaxTemperatureValue {
-    return @"55";
+-(NSString *)getMaxTemperatureValue:(NSInteger)row {
+    return ((WeatherModel *)self.weatherModelsArray[row]).tempMax;
 }
 
--(NSString *)getAtmosphericPressureValue {
-    return @"700";
+-(NSString *)getAtmosphericPressureValue:(NSInteger)row {
+    return ((WeatherModel *)self.weatherModelsArray[row]).pressure;
 }
 
--(NSString *)getHumidityValue {
-    return @"67";
+-(NSString *)getHumidityValue:(NSInteger)row {
+    return ((WeatherModel *)self.weatherModelsArray[row]).humidity;
 }
 @end

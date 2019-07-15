@@ -11,13 +11,13 @@
 
 @interface WeatherDetailViewModel : NSObject
 - (id)initWithMark:(Mark *)mark;
--(NSString *)getWindDirectionValue;
--(NSString *)getWindSpeedValue;
--(NSString *)getTemperatureValue;
--(NSString *)getMinTemperatureValue;
--(NSString *)getMaxTemperatureValue;
--(NSString *)getAtmosphericPressureValue;
--(NSString *)getHumidityValue;
+-(NSString *)getWindSpeedValue:(NSInteger)row;
+-(NSString *)getTemperatureValue:(NSInteger)row;
+-(NSString *)getMinTemperatureValue:(NSInteger)row;
+-(NSString *)getMaxTemperatureValue:(NSInteger)row;
+-(NSString *)getAtmosphericPressureValue:(NSInteger)row;
+-(NSString *)getHumidityValue:(NSInteger)row;
+-(NSString *)getDateValue:(NSInteger)row;
 -(void)getWeatherData:(void(^)(void))getCompletion;
 @end
 

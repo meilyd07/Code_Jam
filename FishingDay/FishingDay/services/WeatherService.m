@@ -22,7 +22,7 @@ static WeatherService *shared = nil;
 
 -(void)getWeatherForLongitude:(NSString *)longitude latitude:(NSString *)latitude completionHandler:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler {
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast?lat=%@&units=metric&appid=c3a585d3bd51f4d6d275d1cf13120ce0&lon=%@&cnt=3", latitude, longitude]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/forecast?lat=%@&units=metric&appid=c3a585d3bd51f4d6d275d1cf13120ce0&lon=%@&cnt=8", latitude, longitude]];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url completionHandler:completionHandler];
     [dataTask resume];
 }
