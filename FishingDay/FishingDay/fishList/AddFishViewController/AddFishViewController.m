@@ -22,6 +22,7 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
 @property (strong, nonatomic) IBOutlet UITextField *urrTextField;
 @property (strong, nonatomic) IBOutlet UIButton *saveBtn;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionTextvVew;
+@property (strong, nonatomic) IBOutlet UIScrollView *addScrollView;
 
 
 @end
@@ -44,6 +45,8 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
         self.fish = [FishModel new];
         
     }
+  
+      self.addScrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     self.maxTempTextField.delegate=self;
     self.minTempTextField.delegate=self;
      [self.saveBtn addTarget:self action:@selector(onSaveButton) forControlEvents:UIControlEventTouchUpInside];
@@ -53,8 +56,8 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
 
 - (void)onSaveButton {
     if([self.nameTextfield.text isEqualToString:@""]){
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Сохранение невозможно"
-                                                                       message:@"Поле <Название рыбы> не может быть пустым"
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Внимание!"
+                                                                       message:@"Введите название рыбы"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
@@ -82,6 +85,7 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
     [self.view addSubview:view];
     [view animateLinesWithColor:[UIColor blueColor].CGColor andLineWidth:8 startPoint:CGPointMake(  0+view.frame.origin.y-self.saveBtn.frame.origin.y,0-view.frame.origin.x-self.saveBtn.frame.origin.x) rollToStroke:0.3
                curveControlPoints:@[[LinesCurvePoints curvePoints:CGPointMake(-50, -2) point2:CGPointMake(60, 5)],[LinesCurvePoints curvePoints:CGPointMake(-60, 10) point2:CGPointMake(100, 5)]] animationDuration:1];
+    
     [UIView animateWithDuration:2.0 animations:^{
          view.alpha = 0.0;
     } completion:^(BOOL finished) {
@@ -89,20 +93,13 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
     }];
     
 }
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string  {
     NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890+"] invertedSet];
     NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
     return [string isEqualToString:filtered];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -11,6 +11,7 @@
 #import "FishInfoViewController.h"
 #import "FishModel.h"
 #import "AddFishViewController.h"
+#import "Mark.h"
 
 
 
@@ -24,6 +25,7 @@ NSString * const cellReuseId = @"cellReuseId";
 
 @property(strong,nonatomic) NSMutableArray *fishesArr;
 @property(strong,nonatomic) NSArray *fishesAr;
+@property(strong,nonatomic) NSMutableSet *fishesIDSet;
 
 //@property (copy, nonatomic) NSArray *imageURLs;
 @property (strong, nonatomic) NSCache *imageCache;
@@ -84,12 +86,15 @@ NSString * const cellReuseId = @"cellReuseId";
             
             self.fishesAr = decodedMarks;
         } else {
-            NSData *marksDataa = [[NSUserDefaults standardUserDefaults] objectForKey:fishesDataKey];
+            NSData *fishDataa = [[NSUserDefaults standardUserDefaults] objectForKey:fishesDataKey];
             NSSet *classes = [NSSet setWithObjects:[NSArray class], [FishModel class], nil];
-            NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:marksDataa error:nil];
+            NSArray *decodedFishes = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:fishDataa error:nil];
             
-            self.fishesAr = decodedMarks;
+            self.fishesAr = decodedFishes;
         }
+        
+        
+        
     }
     return self;
 }
@@ -98,12 +103,28 @@ NSString * const cellReuseId = @"cellReuseId";
     [super viewDidLoad];
     self.navigationController.navigationBar.backgroundColor = [UIColor blueColor];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"Fishes";
+    self.navigationItem.title = @"Виды рыб";
    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
       UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addFish)];
     self.navigationItem.rightBarButtonItem = addButton;
     
     self.imageCache = [NSCache new];
+    
+    NSData *markDataa = [[NSUserDefaults standardUserDefaults] objectForKey:@"marksDataKey"];
+    NSSet *classes = [NSSet setWithObjects:[NSArray class], [Mark class], nil];
+    NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:markDataa error:nil];
+    
+    NSArray *arrMarks = [NSArray arrayWithArray:decodedMarks];
+    NSMutableSet *set = [[NSMutableSet alloc] init];
+    for (int i=0; i<arrMarks.count; i++) {
+        NSArray* arr= [NSArray arrayWithArray:[[arrMarks objectAtIndex:i]fishId]];
+        for(int j =0;j<arr.count;j++){
+            [set addObject:arr[j]];
+        }
+        
+    }
+    
+    self.fishesIDSet = [[NSMutableSet alloc] initWithSet:set];
     
     
     [self setupTableView];
@@ -138,8 +159,6 @@ NSString * const cellReuseId = @"cellReuseId";
     self.fishesTableView.dataSource = self;
     [self.fishesTableView registerClass:[FishTableViewCell class] forCellReuseIdentifier:cellReuseId];
     self.fishesTableView.tableFooterView = [UIView new];
-  //  self.fishesTableView.allowsSelection = NO;
-    
 }
 
 
@@ -196,6 +215,7 @@ NSString * const cellReuseId = @"cellReuseId";
     NSString *imageURL = model.imageUrl;
     cell.imageUrlName = imageURL;
     cell.fishName = model.nameFish;
+    cell.selectionStyle= UITableViewCellSelectionStyleNone;
     [cell setNeedsUpdateConstraints];
     UIImage *image = [self.imageCache objectForKey:imageURL];
     if (image) {
@@ -263,6 +283,21 @@ NSString * const cellReuseId = @"cellReuseId";
     }];
     UIContextualAction *delete = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"delete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
         NSMutableArray *marks = [self mutableArrayValueForKey:@"fishesAr"];
+        FishModel *fsh = [marks objectAtIndex:indexPath.row];
+        
+        if   ([self.fishesIDSet containsObject:fsh.idFish]){
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Внимание!"
+                                                                           message:@"Невозможно удаление, данный тип рыбы используется в метках"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {}];
+            
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+            return;
+        }
+        
         [marks removeObjectAtIndex:indexPath.row];
         [tableView reloadData];
         [self saveData];

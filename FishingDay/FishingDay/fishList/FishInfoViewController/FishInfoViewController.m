@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"Image";
+    self.navigationItem.title = self.fish.nameFish;
     self.view.backgroundColor = [UIColor whiteColor];
     if (!self.image) {
         self.image = [UIImage imageNamed:@"fish_food"];
@@ -53,19 +53,11 @@
     
     
     
-    //UILabel *lab = [[UILabel alloc] initWithFrame:CGRectZero];
-   // self.fishNameLabel = lab;
     self.fishNameLabel.text = self.fish.nameFish;
     self.fishNameLabel.textColor = [UIColor blackColor];
     self.fishMinLabel.text = [self.fish.minTemperature stringValue];
     self.fishMaxLabel.text =[self.fish.maxTemperature stringValue];
     self.fishTextView.text = self.fish.descriptionFish;
-    
-   // self.d
-       // self.fishNameLabel.text = [self.fish.minTemperature stringValue];
-   // self.fishNameLabel.text = [self.fish.maxTemperature stringValue];
-    
-    
     
     
 }

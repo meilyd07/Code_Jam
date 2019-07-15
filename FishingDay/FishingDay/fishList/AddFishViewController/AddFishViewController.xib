@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddFishViewController">
             <connections>
+                <outlet property="addScrollView" destination="xsR-hp-MRC" id="mGx-qx-y7Z"/>
                 <outlet property="descriptionTextvVew" destination="iBG-xy-AIK" id="OWT-cq-sxa"/>
                 <outlet property="maxTempLabel" destination="4M9-QT-eZc" id="keO-Wf-LM2"/>
                 <outlet property="maxTempTextField" destination="SOV-YQ-8c7" id="jrL-6k-GlX"/>
