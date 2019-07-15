@@ -11,7 +11,7 @@
 
 NSString * const fishChangedNotification = @"fishChangedNotification";
 
-@interface AddFishViewController ()
+@interface AddFishViewController () <UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *nameLavbel;
 @property (strong, nonatomic) IBOutlet UITextField *nameTextfield;
 @property (strong, nonatomic) IBOutlet UILabel *minTempLabel;
@@ -46,7 +46,7 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
         
     }
   
-      self.addScrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    //  self.addScrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     self.maxTempTextField.delegate=self;
     self.minTempTextField.delegate=self;
      [self.saveBtn addTarget:self action:@selector(onSaveButton) forControlEvents:UIControlEventTouchUpInside];
@@ -128,7 +128,7 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
    CGPoint poin =  CGPointMake(_descriptionTextvVew.frame.origin.x, _descriptionTextvVew.frame.origin.y+50);
     
     if (!CGRectContainsPoint(aRect, poin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, _descriptionTextvVew.frame.origin.y-kbSize.height+125);
+        CGPoint scrollPoint = CGPointMake(0.0, _descriptionTextvVew.frame.origin.y-kbSize.height+100);
         [self.addScrollView setContentOffset:scrollPoint animated:YES];
     }
 }
