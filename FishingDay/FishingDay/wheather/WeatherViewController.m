@@ -31,6 +31,7 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.viewModel getData];
+    [self.tableView reloadData];
 }
 
 -(void)setupTable {
@@ -61,7 +62,6 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
     
     Mark *mark = [self.viewModel getMarkByRow:indexPath.row];
     markCell.markTitle.text = mark.title;
-    markCell.uniqueId = @"temp";
     markCell.delegate = self;
     markCell.cellIndexRow = indexPath.row;
     return markCell;

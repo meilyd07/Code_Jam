@@ -21,6 +21,11 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.viewModel getWeatherData:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
     self.sections = @[
                       [[WeatherSection alloc] init: temperatureSection items:@[
                                            @(temperature),
@@ -91,7 +96,7 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
     case temperatureSection:
             return @"Температура:";
     case pressureAndHumiditySection:
-            return @"Атмосферное давление и влажность";
+            return @"Атм. давление и влажность";
     case windSection:
             return @"Параметры ветра";
     default:

@@ -15,5 +15,6 @@ extern NSString * const markChangedNotification;
 
 @property (strong, nonatomic) Mark *mark;
 @property (assign, nonatomic) NSInteger row;
+@property (assign, nonatomic) BOOL isCurrentLocation;
 
 @end

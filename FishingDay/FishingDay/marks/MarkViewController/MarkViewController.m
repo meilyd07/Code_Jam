@@ -27,6 +27,7 @@ NSString * const markAnnotationReuseId = @"markAnnotationReuseId";
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) MKPointAnnotation *annotation;
+@property (strong, nonatomic) CLLocation *currentLocation;
 
 @end
 
@@ -42,6 +43,9 @@ NSString * const markAnnotationReuseId = @"markAnnotationReuseId";
     [self.mapView registerClass:[MKAnnotationView class] forAnnotationViewWithReuseIdentifier:markAnnotationReuseId];
     [self.mapView addAnnotation:self.annotation];
     [self setupMarkInfo];
+    if (self.isCurrentLocation) {
+        [self.mapView setCenterCoordinate:[self.currentLocation coordinate] animated:NO];
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -156,6 +160,7 @@ NSString * const markAnnotationReuseId = @"markAnnotationReuseId";
     self.mark.location = location.coordinate;
     self.annotation.coordinate = self.mark.location;
     self.mapView.region = MKCoordinateRegionMake(self.mark.location, MKCoordinateSpanMake(0.1, 0.1));
+    self.currentLocation = location;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {

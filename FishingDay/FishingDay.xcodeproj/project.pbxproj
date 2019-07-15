@@ -34,6 +34,8 @@
 		6AB238E922D92FAE00568D89 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238E822D92FAE00568D89 /* MapViewController.m */; };
 		6AB238EC22D92FC600568D89 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238EB22D92FC600568D89 /* WeatherViewController.m */; };
 		6AB238F222D92FF400568D89 /* MarksListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238F122D92FF400568D89 /* MarksListViewController.m */; };
+		6AB66D8322DBD90A005826AA /* WeatherService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB66D8222DBD90A005826AA /* WeatherService.m */; };
+		6AB66D8722DBF9B9005826AA /* WeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB66D8622DBF9B9005826AA /* WeatherModel.m */; };
 		E37855AD22D9E13F003114FD /* MarkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E37855AB22D9E13F003114FD /* MarkTableViewCell.m */; };
 		E37855AE22D9E13F003114FD /* MarkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E37855AC22D9E13F003114FD /* MarkTableViewCell.xib */; };
 		E37855B122D9EAEC003114FD /* Mark.m in Sources */ = {isa = PBXBuildFile; fileRef = E37855B022D9EAEC003114FD /* Mark.m */; };
@@ -90,6 +92,10 @@
 		6AB238EB22D92FC600568D89 /* WeatherViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 		6AB238F022D92FF400568D89 /* MarksListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarksListViewController.h; sourceTree = "<group>"; };
 		6AB238F122D92FF400568D89 /* MarksListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarksListViewController.m; sourceTree = "<group>"; };
+		6AB66D8122DBD90A005826AA /* WeatherService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherService.h; sourceTree = "<group>"; };
+		6AB66D8222DBD90A005826AA /* WeatherService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherService.m; sourceTree = "<group>"; };
+		6AB66D8522DBF9B9005826AA /* WeatherModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherModel.h; sourceTree = "<group>"; };
+		6AB66D8622DBF9B9005826AA /* WeatherModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherModel.m; sourceTree = "<group>"; };
 		E37855AA22D9E13F003114FD /* MarkTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkTableViewCell.h; sourceTree = "<group>"; };
 		E37855AB22D9E13F003114FD /* MarkTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarkTableViewCell.m; sourceTree = "<group>"; };
 		E37855AC22D9E13F003114FD /* MarkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkTableViewCell.xib; sourceTree = "<group>"; };
@@ -220,6 +226,8 @@
 		6AB238D022D92D0E00568D89 /* FishingDay */ = {
 			isa = PBXGroup;
 			children = (
+				6AB66D8022DBD8BA005826AA /* services */,
+				6AB66D8422DBF992005826AA /* weatherModel */,
 				E37855AF22D9EAC0003114FD /* MarkModel */,
 				6AB238F622D930A000568D89 /* map */,
 				6AB238F522D9308A00568D89 /* fishList */,
@@ -284,6 +292,24 @@
 				6AB238E822D92FAE00568D89 /* MapViewController.m */,
 			);
 			path = map;
+			sourceTree = "<group>";
+		};
+		6AB66D8022DBD8BA005826AA /* services */ = {
+			isa = PBXGroup;
+			children = (
+				6AB66D8122DBD90A005826AA /* WeatherService.h */,
+				6AB66D8222DBD90A005826AA /* WeatherService.m */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
+		6AB66D8422DBF992005826AA /* weatherModel */ = {
+			isa = PBXGroup;
+			children = (
+				6AB66D8522DBF9B9005826AA /* WeatherModel.h */,
+				6AB66D8622DBF9B9005826AA /* WeatherModel.m */,
+			);
+			path = weatherModel;
 			sourceTree = "<group>";
 		};
 		E37855A922D9E11F003114FD /* MarkTableViewCell */ = {
@@ -392,6 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AB66D8322DBD90A005826AA /* WeatherService.m in Sources */,
 				6A75CC8522DAB1D700F45D45 /* WeatherSection.m in Sources */,
 				6AB238E122D92D0F00568D89 /* main.m in Sources */,
 				E37855AD22D9E13F003114FD /* MarkTableViewCell.m in Sources */,
@@ -404,6 +431,7 @@
 				5E0CBE3222DA44DC00DC17FD /* FishListViewController.m in Sources */,
 				E37855B122D9EAEC003114FD /* Mark.m in Sources */,
 				5EF817DC22DBECB300C2ABDB /* UIView+AnimatedLines.m in Sources */,
+				6AB66D8722DBF9B9005826AA /* WeatherModel.m in Sources */,
 				6A75CC7322DA830800F45D45 /* WeatherViewModel.m in Sources */,
 				E37855BA22DA07AE003114FD /* MarkViewController.m in Sources */,
 				5E380D4622DB605000F39B51 /* AddFishViewController.m in Sources */,
@@ -554,7 +582,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ly.sokol.FishingDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -571,7 +599,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ly.sokol.FishingDay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
