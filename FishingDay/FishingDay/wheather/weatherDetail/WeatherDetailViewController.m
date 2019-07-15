@@ -51,6 +51,52 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
                                                                                        @(humidity),
                                                                                        @(windSpeed),
                                                                                        @(windSpeed)
+                                                                                       ]],
+                              [[WeatherSection alloc] init: temperatureSection items:@[
+                                                                                       @(temperature),
+                                                                                       @(tempMax),
+                                                                                       @(tempMin),
+                                                                                       @(pressure),
+                                                                                       @(humidity),
+                                                                                       @(windSpeed),
+                                                                                       @(windSpeed)
+                                                                                       ]],
+                              [[WeatherSection alloc] init: temperatureSection items:@[
+                                                                                       @(temperature),
+                                                                                       @(tempMax),
+                                                                                       @(tempMin),
+                                                                                       @(pressure),
+                                                                                       @(humidity),
+                                                                                       @(windSpeed),
+                                                                                       @(windSpeed)
+                                                                                       ]],
+                              [[WeatherSection alloc] init: temperatureSection items:@[
+                                                                                       @(temperature),
+                                                                                       @(tempMax),
+                                                                                       @(tempMin),
+                                                                                       @(pressure),
+                                                                                       @(humidity),
+                                                                                       @(windSpeed),
+                                                                                       @(windSpeed)
+                                                                                       ]],
+                              [[WeatherSection alloc] init: temperatureSection items:@[
+                                                                                       @(temperature),
+                                                                                       @(tempMax),
+                                                                                       @(tempMin),
+                                                                                       @(pressure),
+                                                                                       @(humidity),
+                                                                                       @(windSpeed),
+                                                                                       @(windSpeed)
+                                                                                       ]],
+                              
+                              [[WeatherSection alloc] init: temperatureSection items:@[
+                                                                                       @(temperature),
+                                                                                       @(tempMax),
+                                                                                       @(tempMin),
+                                                                                       @(pressure),
+                                                                                       @(humidity),
+                                                                                       @(windSpeed),
+                                                                                       @(windSpeed)
                                                                                        ]]
                               ];
             [self.tableView reloadData];
@@ -114,20 +160,6 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
     default:
             return @"";
     }
-//    switch (section) {
-//        case 0:
-//            return @"Погода сегодня";
-//            break;
-//        case 1:
-//            return @"Погода завтра";
-//            break;
-//        case 2:
-//            return @"Погода послезавтра";
-//            break;
-//        default:
-//            return @"";
-//            break;
-//    }
 }
 
 @end
