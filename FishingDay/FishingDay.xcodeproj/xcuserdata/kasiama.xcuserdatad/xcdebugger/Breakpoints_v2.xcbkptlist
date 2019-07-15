@@ -426,7 +426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FishingDay/fishList/FishListViewController/FishListViewController.m"
-            timestampString = "584884765.293198"
+            timestampString = "584886584.113645"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
@@ -442,12 +442,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FishingDay/fishList/FishListViewController/FishListViewController.m"
-            timestampString = "584884765.2937011"
+            timestampString = "584886584.113789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "222"
             endingLineNumber = "222"
-            landmarkName = "-fishChanged:"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -458,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FishingDay/fishList/FishListViewController/FishListViewController.m"
-            timestampString = "584884765.294142"
+            timestampString = "584886584.113873"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "77"
@@ -474,7 +474,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FishingDay/fishList/FishListViewController/FishListViewController.m"
-            timestampString = "584884765.29462"
+            timestampString = "584886584.113928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
@@ -490,12 +490,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FishingDay/fishList/FishListViewController/FishListViewController.m"
-            timestampString = "584884765.295058"
+            timestampString = "584886584.114017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "241"
             endingLineNumber = "241"
-            landmarkName = "-saveData"
+            landmarkName = "-fishChanged:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -506,12 +506,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FishingDay/fishList/FishListViewController/FishListViewController.m"
-            timestampString = "584884765.295542"
+            timestampString = "584886584.114096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "218"
             endingLineNumber = "218"
-            landmarkName = "-fishChanged:"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -522,12 +522,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FishingDay/fishList/FishListViewController/FishListViewController.m"
-            timestampString = "584884765.295945"
+            timestampString = "584886584.114163"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "168"
             endingLineNumber = "168"
-            landmarkName = "-addFish"
+            landmarkName = "-loadNewImageWithURL:forCell:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -538,13 +538,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FishingDay/fishList/FishListViewController/FishListViewController.m"
-            timestampString = "584884765.296283"
+            timestampString = "584886584.114231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
             endingLineNumber = "226"
-            landmarkName = "-fishChanged:"
-            landmarkType = "7">
+            landmarkName = "@implementation FishListViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
