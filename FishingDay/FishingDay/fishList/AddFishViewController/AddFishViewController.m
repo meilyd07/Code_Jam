@@ -7,6 +7,7 @@
 //
 
 #import "AddFishViewController.h"
+#import "UIView+AnimatedLines.h"
 
 NSString * const fishChangedNotification = @"fishChangedNotification";
 
@@ -36,6 +37,10 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
          self.maxTempTextField.text = [self.fish.maxTemperature stringValue];
         self.urrTextField.text = self.fish.imageUrl;
     }
+    else {
+        self.fish = [FishModel new];
+        //self.mark.location =
+    }
     
      [self.saveBtn addTarget:self action:@selector(onSaveButton) forControlEvents:UIControlEventTouchUpInside];
     // Do any additional setup after loading the view from its nib.
@@ -48,7 +53,28 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
     self.fish.minTemperature = [NSNumber numberWithFloat: [self.minTempTextField.text floatValue]];
     self.fish.imageUrl=self.urrTextField.text;
     [[NSNotificationCenter defaultCenter] postNotificationName:fishChangedNotification object:self];
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 200, 200)];
+    //view.backgroundColor = [UIColor whiteColor];
+    UIGraphicsBeginImageContext(view.frame.size);
+    [[UIImage imageNamed:@"save2"] drawInRect:view.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    view.backgroundColor = [UIColor colorWithPatternImage:image];
+    //UIImage *img = [UIImage imageNamed:@"save"];
+    
+    [self.view addSubview:view];
+    
+
+    [view animateLinesWithColor:[UIColor redColor].CGColor andLineWidth:8 startPoint:CGPointMake(100, -200) rollToStroke:0.25
+               curveControlPoints:@[[LinesCurvePoints curvePoints:CGPointMake(-50, -2) point2:CGPointMake(60, 5)],[LinesCurvePoints curvePoints:CGPointMake(-60, 10) point2:CGPointMake(100, 5)]] animationDuration:1];
+    [UIView animateWithDuration:2.0 animations:^{
+         view.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
 }
 
 /*

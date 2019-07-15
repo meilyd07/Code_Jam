@@ -39,8 +39,8 @@
     
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:self.image];
-    [self.view addSubview:imageView];
     self.fishImageViiew = imageView;
+    [self.view addSubview:self.fishImageViiew];
     self.fishImageViiew.translatesAutoresizingMaskIntoConstraints = NO;
     self.fishImageViiew.contentMode = UIViewContentModeScaleAspectFit;
     [NSLayoutConstraint activateConstraints:@[[self.fishImageViiew.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:10],
@@ -50,13 +50,12 @@
                                               ]];
     
     
+    
     //UILabel *lab = [[UILabel alloc] initWithFrame:CGRectZero];
    // self.fishNameLabel = lab;
     self.fishNameLabel.text = self.fish.nameFish;
     self.fishNameLabel.textColor = [UIColor blackColor];
-    
-    NSString *str = self.fishNameLabel.text;
-   // self.fishNameLabel.text = [self.fish.minTemperature stringValue];
+       // self.fishNameLabel.text = [self.fish.minTemperature stringValue];
    // self.fishNameLabel.text = [self.fish.maxTemperature stringValue];
     
     
@@ -65,11 +64,11 @@
 }
 
 - (void)imageChanged:(NSNotification *)notification {
-    if (![[notification.userInfo objectForKey:key2] boolValue]) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    
+    if([notification.userInfo objectForKey:key1]){
     self.image = [notification.userInfo objectForKey:key1];
     self.fishImageViiew.image = self.image;
+    }
 }
 
 @end

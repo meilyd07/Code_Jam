@@ -136,6 +136,15 @@ NSString * const cellReuseId = @"cellReuseId";
 
 #pragma mark - UITableViewDataSource
 
+- (void)addFish {
+    AddFishViewController *markVC = [AddFishViewController new];
+    markVC.row = self.fishesAr.count;
+    [self.navigationController pushViewController:markVC animated:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fishChanged:) name:fishChangedNotification object:markVC];
+}
+
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.fishesAr.count;
 }
@@ -165,20 +174,21 @@ NSString * const cellReuseId = @"cellReuseId";
     FishModel *model = self.fishesAr[indexPath.row];
     FishInfoViewController *imageVC = [FishInfoViewController new];
      imageVC.fish = model;
-    NSString *imageURL = self.imageURLs[indexPath.row];
+    NSString *imageURL = model.imageUrl;
     UIImage *image = [self.imageCache objectForKey:imageURL];
     if (image) {
         imageVC.image = image;
     }
     
     self.tappedRowIndexPath = indexPath;
+   
     [self.navigationController pushViewController:imageVC animated:YES];
 }
 
 - (void)didTapOnImageViewInCell:(FishTableViewCell *)cell {
     NSIndexPath *indexPath = [self.fishesTableView indexPathForCell:cell];
-    NSString *imageURL = self.imageURLs[indexPath.row];
     FishModel *model = self.fishesAr[indexPath.row];
+    NSString *imageURL = model.imageUrl;
     FishInfoViewController1 *imageVC = [FishInfoViewController1 new];
     imageVC.imageURL = imageURL;
     imageVC.fish = model;
@@ -192,6 +202,28 @@ NSString * const cellReuseId = @"cellReuseId";
     [self.navigationController pushViewController:imageVC animated:YES];
 }
 
+- (void)fishChanged:(NSNotification *)notification {
+    AddFishViewController *markVC = notification.object;
+    NSInteger row = markVC.row;
+    FishModel *fish;
+    if (row == self.fishesAr.count) { // create mark
+        fish = [FishModel new];
+        NSMutableArray *marks = [self mutableArrayValueForKey:@"fishesAr"];
+        fish.nameFish = markVC.fish.nameFish;
+        fish.maxTemperature= markVC.fish.maxTemperature;
+        fish.minTemperature = markVC.fish.minTemperature;
+        [marks addObject:fish];
+        
+          // mark.title = markVC.mark.title;
+    } else { // update mark
+        fish = self.fishesAr[row];
+    }
+    
+    
+    [self.fishesTableView reloadData];
+    [self saveData];
+}
+
 - (void)saveData {
     NSData *marksData = [NSKeyedArchiver archivedDataWithRootObject:self.fishesAr requiringSecureCoding:NO error:nil];
     [[NSUserDefaults standardUserDefaults] setObject:marksData forKey:fishesDataKey];
@@ -202,6 +234,7 @@ NSString * const cellReuseId = @"cellReuseId";
     UIContextualAction *change = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"change" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
         AddFishViewController *vc = [AddFishViewController new];
         vc.fish =  self.fishesAr[indexPath.row];
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fishChanged:) name:fishChangedNotification object:vc];
         [self.navigationController pushViewController:vc animated:YES];
         
     }];

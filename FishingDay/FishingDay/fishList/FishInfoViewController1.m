@@ -39,9 +39,12 @@
 #pragma mark - Private
 
 - (void)setupImageView {
-
+    if(!self.image){
+        self.image = [UIImage imageNamed:@"fish_food"];
+    }
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:self.image];
+    
     [self.view addSubview:imageView];
     self.imageView = imageView;
     self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
