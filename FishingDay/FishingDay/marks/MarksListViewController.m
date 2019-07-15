@@ -34,11 +34,13 @@ NSString * const markCellId = @"markCellId";
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMark)];
     self.navigationItem.rightBarButtonItem = addButton;
     [self setupTableView];
+    [self setupNoMarksScreen];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self fetchMarks];
+    [self showNoMarks:(self.marks.count == 0)];
     [self.tableView reloadData];
 }
 
@@ -72,17 +74,14 @@ NSString * const markCellId = @"markCellId";
 - (void)fetchMarks {
     self.marks = [NSArray array];
     NSData *marksData = [[NSUserDefaults standardUserDefaults] objectForKey:marksDataKey];
-    if (!marksData) {
-        [self showNoMarks];
-    } else {
+    if (marksData) {
         NSSet *classes = [NSSet setWithObjects:[NSArray class], [Mark class], nil];
         NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:marksData error:nil];
         self.marks = decodedMarks;
     }
 }
 
-- (void)showNoMarks {
-    self.tableView.hidden = YES;
+- (void)setupNoMarksScreen {
     UIImage *fishHookImage = [UIImage imageNamed:@"fishingMan"];
     UIImageView *noDataImageView = [[UIImageView alloc] initWithImage:fishHookImage];
     UILabel *addFirstMarkLabel = [UILabel new];
@@ -96,12 +95,18 @@ NSString * const markCellId = @"markCellId";
     self.addFirstMarkLabel.translatesAutoresizingMaskIntoConstraints = NO;
     CGFloat aspectRatio = fishHookImage.size.height / fishHookImage.size.width;
     [NSLayoutConstraint activateConstraints:@[
-        [self.noDataImageView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor multiplier:0.4],
-        [self.noDataImageView.heightAnchor constraintEqualToAnchor:self.noDataImageView.widthAnchor multiplier:aspectRatio],
-        [self.noDataImageView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:25],
-        [self.noDataImageView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
-        [self.addFirstMarkLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
-        [self.addFirstMarkLabel.topAnchor constraintEqualToAnchor:self.noDataImageView.bottomAnchor constant:15]]];
+          [self.noDataImageView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor multiplier:0.4],
+          [self.noDataImageView.heightAnchor constraintEqualToAnchor:self.noDataImageView.widthAnchor multiplier:aspectRatio],
+          [self.noDataImageView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:25],
+          [self.noDataImageView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+          [self.addFirstMarkLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+          [self.addFirstMarkLabel.topAnchor constraintEqualToAnchor:self.noDataImageView.bottomAnchor constant:15]]];
+}
+
+- (void)showNoMarks:(BOOL)noMarks {
+    self.tableView.hidden = noMarks;
+    self.noDataImageView.hidden = !noMarks;
+    self.addFirstMarkLabel.hidden = !noMarks;
 }
 
 - (void)addMark {
@@ -154,7 +159,7 @@ NSString * const markCellId = @"markCellId";
         [self saveData];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         if (marks.count == 0) {
-            [self showNoMarks];
+            [self showNoMarks:YES];
         }
     }
 }
@@ -182,9 +187,9 @@ NSString * const markCellId = @"markCellId";
         mark = [Mark new];
         NSMutableArray *marks = [self mutableArrayValueForKey:@"marks"];
         [marks addObject:mark];
-        self.noDataImageView.hidden = YES;
-        self.addFirstMarkLabel.hidden = YES;
-        self.tableView.hidden = NO;
+        if (self.marks.count == 1) { // first mark
+            [self showNoMarks:NO];
+        }
     } else { // update mark
         mark = self.marks[row];
     }

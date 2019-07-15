@@ -11,6 +11,7 @@
 #import <AVKit/AVKit.h>
 #import <Photos/Photos.h>
 #import "UIView+AnimatedLines.h"
+#import "FishModel.h"
 
 NSString * const markChangedNotification = @"markChangedNotification";
 NSString * const markAnnotationReuseId = @"markAnnotationReuseId";
@@ -90,7 +91,7 @@ NSString * const markAnnotationReuseId = @"markAnnotationReuseId";
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 200, 200)];
     UIGraphicsBeginImageContext(view.frame.size);
-    [[UIImage imageNamed:@"saveIcon"] drawInRect:view.bounds];
+    [[UIImage imageNamed:@"save2"] drawInRect:view.bounds];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     view.backgroundColor = [UIColor colorWithPatternImage:image];
@@ -104,7 +105,7 @@ NSString * const markAnnotationReuseId = @"markAnnotationReuseId";
     self.mark.title = self.titleTextField.text;
     self.mark.details = self.pickerTextField.text;
     self.mark.photo = self.photoImageView.image;
-    self.mark.fishId = self.selectedFishTypes;
+    self.mark.fishId = self.selectedFishTypes.count == 0 ? nil : self.selectedFishTypes;
     [[NSNotificationCenter defaultCenter] postNotificationName:markChangedNotification object:self];
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -154,9 +155,11 @@ NSString * const markAnnotationReuseId = @"markAnnotationReuseId";
 
 - (void)fetchFishTypes {
     self.fishTypes = [NSMutableDictionary dictionary];
-    //TODO: fetch from user defaults
-    for (int i = 1; i < 7; i++) {
-        [self.fishTypes setObject:[NSString stringWithFormat:@"fish %d", i] forKey:@(i)];
+    NSData *fishData = [[NSUserDefaults standardUserDefaults] objectForKey:fishesDataKey];
+    NSSet *classes = [NSSet setWithObjects:[NSArray class], [FishModel class], nil];
+    NSArray *decodedFishInfo = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:fishData error:nil];
+    for (FishModel *fish in decodedFishInfo) {
+        [self.fishTypes addEntriesFromDictionary:@{fish.idFish: fish.nameFish}];
     }
     self.keysForTypes = self.fishTypes.allKeys;
 }
