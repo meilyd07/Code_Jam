@@ -50,6 +50,7 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
     self.maxTempTextField.delegate=self;
     self.minTempTextField.delegate=self;
      [self.saveBtn addTarget:self action:@selector(onSaveButton) forControlEvents:UIControlEventTouchUpInside];
+    [self registerForKeyboardNotifications];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -100,6 +101,48 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
     return [string isEqualToString:filtered];
 }
 
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
 
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.addScrollView.contentInset = contentInsets;
+    self.addScrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it visible
+    // Your application might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    
+   CGPoint poin =  CGPointMake(_descriptionTextvVew.frame.origin.x, _descriptionTextvVew.frame.origin.y+50);
+    
+    if (!CGRectContainsPoint(aRect, poin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, _descriptionTextvVew.frame.origin.y-kbSize.height+125);
+        [self.addScrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
 
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.addScrollView.contentInset = contentInsets;
+    self.addScrollView.scrollIndicatorInsets = contentInsets;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 @end

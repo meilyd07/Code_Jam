@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 extern NSString * const fishChangedNotification;
-@interface AddFishViewController : UIViewController
+@interface AddFishViewController : UIViewController <UITextFieldDelegate>
 
 @property (assign, nonatomic) NSInteger row;
 @property (strong, nonatomic) FishModel *fish;
