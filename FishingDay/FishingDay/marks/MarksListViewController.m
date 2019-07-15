@@ -17,28 +17,48 @@ NSString * const markCellId = @"markCellId";
 
 @property (copy, nonatomic) NSArray *marks;
 @property (weak, nonatomic) UITableView *tableView;
+@property (weak, nonatomic) UIImageView *noDataImageView;
+@property (weak, nonatomic) UILabel *addFirstMarkLabel;
 
 @end
 
 @implementation MarksListViewController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = NO;
     self.navigationItem.title = @"Места улова рыбы";
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addMark)];
     self.navigationItem.rightBarButtonItem = addButton;
-    
+    [self setupTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self fetchMarks];
+    [self.tableView reloadData];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Private
+
+- (void)setupTableView {
     UITableView *marksTableView = [UITableView new];
     [self.view addSubview:marksTableView];
     self.tableView = marksTableView;
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
-        [self.tableView.leadingAnchor constraintEqualToAnchor:self.view.layoutMarginsGuide.leadingAnchor],
-        [self.tableView.topAnchor constraintEqualToAnchor:self.view.layoutMarginsGuide.topAnchor],
-        [self.view.layoutMarginsGuide.trailingAnchor constraintEqualToAnchor:self.tableView.trailingAnchor],
-        [self.view.layoutMarginsGuide.bottomAnchor constraintEqualToAnchor:self.tableView.bottomAnchor]]];
+          [self.tableView.leadingAnchor constraintEqualToAnchor:self.view.layoutMarginsGuide.leadingAnchor],
+          [self.tableView.topAnchor constraintEqualToAnchor:self.view.layoutMarginsGuide.topAnchor],
+          [self.view.layoutMarginsGuide.trailingAnchor constraintEqualToAnchor:self.tableView.trailingAnchor],
+          [self.view.layoutMarginsGuide.bottomAnchor constraintEqualToAnchor:self.tableView.bottomAnchor]]];
     UINib *markCellNib = [UINib nibWithNibName:NSStringFromClass([MarkTableViewCell class]) bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:markCellNib forCellReuseIdentifier:markCellId];
     self.tableView.tableFooterView = [UIView new];
@@ -46,27 +66,13 @@ NSString * const markCellId = @"markCellId";
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 300;
-    
+}
+
+- (void)fetchMarks {
     self.marks = [NSArray array];
     NSData *marksData = [[NSUserDefaults standardUserDefaults] objectForKey:marksDataKey];
     if (!marksData) {
-//        self.tableView.hidden = YES;
-//        UIImageView *noDataImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fishWallpaper"]];
-//        [self.view addSubview:noDataImageView];
-        
-        NSMutableArray *tempMarks = [NSMutableArray array];
-        for (int i = 0; i < 5; i++) {
-            Mark *mark = [Mark new];
-            mark.title = [NSString stringWithFormat:@"Mark %d", i + 1];
-            mark.details = @"aaaaaaaaaaaaaaaaaa";
-            CLLocationDegrees latitude = 53.9615398 + i/20.0;
-            CLLocationDegrees longitude = 27.3475244 + i/20.0;
-            mark.location = CLLocationCoordinate2DMake(latitude, longitude);
-            [tempMarks addObject:mark];
-        }
-        self.marks = tempMarks;
-        
-        
+        [self showNoMarks];
     } else {
         NSSet *classes = [NSSet setWithObjects:[NSArray class], [Mark class], nil];
         NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:marksData error:nil];
@@ -74,12 +80,53 @@ NSString * const markCellId = @"markCellId";
     }
 }
 
+- (void)showNoMarks {
+    self.tableView.hidden = YES;
+    UIImage *fishHookImage = [UIImage imageNamed:@"fishingMan"];
+    UIImageView *noDataImageView = [[UIImageView alloc] initWithImage:fishHookImage];
+    UILabel *addFirstMarkLabel = [UILabel new];
+    [self.view addSubview:noDataImageView];
+    [self.view addSubview:addFirstMarkLabel];
+    self.noDataImageView = noDataImageView;
+    self.addFirstMarkLabel = addFirstMarkLabel;
+    self.addFirstMarkLabel.font = [UIFont systemFontOfSize:19 weight:UIFontWeightSemibold];
+    self.addFirstMarkLabel.text = @"Добавьте первую метку";
+    self.noDataImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.addFirstMarkLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    CGFloat aspectRatio = fishHookImage.size.height / fishHookImage.size.width;
+    [NSLayoutConstraint activateConstraints:@[
+        [self.noDataImageView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor multiplier:0.4],
+        [self.noDataImageView.heightAnchor constraintEqualToAnchor:self.noDataImageView.widthAnchor multiplier:aspectRatio],
+        [self.noDataImageView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:25],
+        [self.noDataImageView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.addFirstMarkLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.addFirstMarkLabel.topAnchor constraintEqualToAnchor:self.noDataImageView.bottomAnchor constant:15]]];
+}
+
 - (void)addMark {
+    CLAuthorizationStatus permissionStatus = [CLLocationManager authorizationStatus];
+    if (permissionStatus == kCLAuthorizationStatusDenied){
+        UIAlertController *locationDenied = [UIAlertController alertControllerWithTitle:@"Внимание!" message:@"Невозможно создать метку: включите доступ к местоположению в настройках телефона" preferredStyle:UIAlertControllerStyleAlert];
+        [locationDenied addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:locationDenied animated:YES completion:nil];
+        return;
+    }
     MarkViewController *markVC = [MarkViewController new];
     markVC.row = self.marks.count;
     [self.navigationController pushViewController:markVC animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(markChanged:) name:markChangedNotification object:markVC];
 }
+
+- (void)saveData {
+    NSData *marksData;
+    if (self.marks.count != 0) {
+        marksData = [NSKeyedArchiver archivedDataWithRootObject:self.marks requiringSecureCoding:NO error:nil];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:marksData forKey:marksDataKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.marks.count;
@@ -98,6 +145,20 @@ NSString * const markCellId = @"markCellId";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSMutableArray *marks = [self mutableArrayValueForKey:@"marks"];
+        [marks removeObjectAtIndex:indexPath.row];
+        [self saveData];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        if (marks.count == 0) {
+            [self showNoMarks];
+        }
+    }
+}
+
+#pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     Mark *mark = self.marks[indexPath.row];
@@ -108,14 +169,7 @@ NSString * const markCellId = @"markCellId";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(markChanged:) name:markChangedNotification object:markVC];
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSMutableArray *marks = [self mutableArrayValueForKey:@"marks"];
-        [marks removeObjectAtIndex:indexPath.row];
-        [self saveData];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-}
+#pragma mark - Notification Handlers
 
 - (void)markChanged:(NSNotification *)notification {
     MarkViewController *markVC = notification.object;
@@ -125,28 +179,18 @@ NSString * const markCellId = @"markCellId";
         mark = [Mark new];
         NSMutableArray *marks = [self mutableArrayValueForKey:@"marks"];
         [marks addObject:mark];
+        self.noDataImageView.hidden = YES;
+        self.addFirstMarkLabel.hidden = YES;
+        self.tableView.hidden = NO;
     } else { // update mark
         mark = self.marks[row];
     }
     mark.title = markVC.mark.title;
     mark.details = markVC.mark.details;
     mark.photo = markVC.mark.photo;
+    mark.location = markVC.mark.location;
     [self.tableView reloadData];
     [self saveData];
-}
-
-- (void)saveData {
-    NSData *marksData;
-    if (self.marks.count != 0) {
-        marksData = [NSKeyedArchiver archivedDataWithRootObject:self.marks requiringSecureCoding:NO error:nil];
-    }
-    [[NSUserDefaults standardUserDefaults] setObject:marksData forKey:marksDataKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

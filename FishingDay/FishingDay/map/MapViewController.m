@@ -16,7 +16,6 @@
 @property(strong, nonatomic) NSMutableArray *marks;
 
 @property(strong, nonatomic) CLLocationManager *locationManager;
-@property(assign, nonatomic) CLLocationCoordinate2D currentPosition;
 @end
 
 NSString * const annotationReuseId = @"annotation";
@@ -69,19 +68,11 @@ NSString * const annotationReuseId = @"annotation";
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectZero];
     self.mapView.translatesAutoresizingMaskIntoConstraints = NO;
     self.mapView.delegate = self;
-    
     [self.mapView registerClass:[MKAnnotationView class] forAnnotationViewWithReuseIdentifier:annotationReuseId];
-    
     [self zoomMap:self.mapView byDelta:0.00003f];
     
-    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longPressGesture.minimumPressDuration = 0.5f;
-    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    [tapGesture shouldRequireFailureOfGestureRecognizer:longPressGesture];
-    
     [self.mapView addGestureRecognizer:tapGesture];
-    [self.mapView addGestureRecognizer:longPressGesture];
 
     [self.view addSubview:self.mapView];
     
@@ -135,24 +126,7 @@ NSString * const annotationReuseId = @"annotation";
     }
 }
 
-- (void)updateCurrentPosition {
-    CLLocation *location = [self.locationManager location];
-    self.currentPosition = [location coordinate];
-}
-
-- (void)updateMap {
-    self.mapView.centerCoordinate = self.currentPosition;
-}
-
 #pragma mark - <MKMapViewDelegate>
-
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-//    scroll finished
-}
-
-- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray<MKAnnotationView *> *)views {
-    NSLog(@"mapView DID ADD ANNOTATION view");
-}
 
 - (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     MKAnnotationView *view = [self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationReuseId];
@@ -162,44 +136,101 @@ NSString * const annotationReuseId = @"annotation";
     view.image = image;
     view.canShowCallout = YES;
     
+    if (![view gestureRecognizers]) {
+        UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        longPressGesture.minimumPressDuration = 0.5f;
+        longPressGesture.delegate = self;
+        
+        [view addGestureRecognizer:longPressGesture];
+    }
+    
     return view;
 }
 
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    
-}
-
-- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
-    
-}
-
 #pragma mark - Touch Handlers
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]
+        && [otherGestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
+        return NO;
+    }
+    return YES;
+}
 
 - (void)handleLongPress:(UITapGestureRecognizer *)longTapGesture {
     if (longTapGesture.state == UIGestureRecognizerStateEnded) {
 
         CGPoint point = [longTapGesture locationInView:self.mapView];
+        UIView *view = [self.mapView hitTest:point withEvent:nil];
+        
+        if ([view isKindOfClass:[MKAnnotationView class]]) {
+            MKAnnotationView *annotationView = (MKAnnotationView *)view;
+            
+            Mark *mark;
+            int index = 0;
+            
+            for (index; index < [self.marks count]; index++) {
+                Mark *currentMark = self.marks[index];
+                if ([self isAnnotation:annotationView.annotation equalToMark:currentMark]) {
+                    mark = currentMark;
+                    break;
+                }
+            }
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Do you want to delete this Mark?"
+                                                                           message:[NSString stringWithFormat:@"Title: %@ \n Details: %@", mark.title, mark.details]
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+
+            NSMutableArray __weak *marks = self.marks;
+            __block MapViewController *safeSelf = self;
+
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Delete"
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * action) {
+
+                                                           [marks removeObjectAtIndex:index];
+                                                           [safeSelf saveData];
+                                                       }];
+
+            UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                           handler:nil];
+
+            [alert addAction:ok];
+            [alert addAction:cancel];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }
+}
+
+- (void)handleTap:(UITapGestureRecognizer *)tapGesture {
+    CGPoint point = [tapGesture locationInView:self.mapView];
+    
+    UIView *view = [self.mapView hitTest:point withEvent:nil];
+    
+    if ([view isKindOfClass:[MKAnnotationView class]]) {
+        NSLog(@"handleTap");
+    } else {
         CLLocationCoordinate2D coordingate = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add Mark"
                                                                        message:@"Write title and details: "
                                                                 preferredStyle:UIAlertControllerStyleAlert];
-
+        
         NSMutableArray __weak *marks = self.marks;
         __block MapViewController *safeSelf = self;
         
         UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Add"
-                                                         style:UIAlertActionStyleDefault
-                                                       handler:^(UIAlertAction * action) {
-                                                           
-                                                           Mark *mark = [[Mark alloc] init];
-                                                           mark.title = alert.textFields[0].text;
-                                                           mark.details = alert.textFields[1].text;
-                                                           mark.location = coordingate;
-                                                           
-                                                           [marks addObject:mark]; // Do I Really need safe?
-                                                           [safeSelf saveData];
-                                                       }];
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       
+                                                       Mark *mark = [[Mark alloc] init];
+                                                       mark.title = alert.textFields[0].text;
+                                                       mark.details = alert.textFields[1].text;
+                                                       mark.location = coordingate;
+                                                       
+                                                       [marks addObject:mark]; // Do I Really need safe?
+                                                       [safeSelf saveData];
+                                                   }];
         
         UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
                                                        handler:nil];
@@ -220,19 +251,20 @@ NSString * const annotationReuseId = @"annotation";
     }
 }
 
-- (void)handleTap:(UITapGestureRecognizer *)tapGesture {
-//    NSLog(@"Tap gesture");
-}
-
 #pragma mark - <CLLocationManagerDelegate>
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedAlways
         || status == kCLAuthorizationStatusAuthorizedWhenInUse){
         
-        [self updateCurrentPosition];
-        [self updateMap];
+        CLLocation *location = [self.locationManager location];
+        [self.mapView setCenterCoordinate:[location coordinate] animated:YES];
     }
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    CLLocation *location = [self.locationManager location];
+    [self.mapView setCenterCoordinate:[location coordinate] animated:YES];
 }
 
 #pragma mark - KVO
@@ -252,6 +284,25 @@ NSString * const annotationReuseId = @"annotation";
 }
 
 #pragma mark - Utils
+
+- (BOOL)isAnnotation:(MKPointAnnotation *)annotation equalToMark:(Mark *)mark {
+    if ([self isCoordinate:mark.location equalTo:annotation.coordinate]
+        && [mark.details isEqualToString:annotation.subtitle]
+        && [mark.title isEqualToString:annotation.title])
+    {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)isCoordinate:(CLLocationCoordinate2D)coordinate equalTo:(CLLocationCoordinate2D)anotherCoordinate {
+    if (coordinate.longitude == anotherCoordinate.longitude
+        && coordinate.latitude == anotherCoordinate.latitude)
+    {
+        return YES;
+    }
+    return NO;
+}
 
 - (void)saveData {
     NSData *marksData = [NSKeyedArchiver archivedDataWithRootObject:self.marks requiringSecureCoding:NO error:nil];
