@@ -14,8 +14,7 @@ static const char * const LAYER_PRO_NAME = "ANIMATED_LINE_LAYER";
 
 @implementation LinesCurvePoints
 
-+(instancetype)curvePoints:(CGPoint)point1 point2:(CGPoint)point2
-{
++(instancetype)curvePoints:(CGPoint)point1 point2:(CGPoint)point2{
     LinesCurvePoints* point = [LinesCurvePoints new];
     point.controlPoint1 = point1;
     point.controlPoint1 = point2;
@@ -24,12 +23,9 @@ static const char * const LAYER_PRO_NAME = "ANIMATED_LINE_LAYER";
 
 @end
 @implementation UIView (AnimatedLines)
--(void)animateLinesWithColor:(CGColorRef)lineColor andLineWidth:(CGFloat)lineWidth startPoint:(CGPoint)startFromPoint rollToStroke:(CGFloat)rollToStroke curveControlPoints:(NSArray<LinesCurvePoints*>*)curvePoints animationDuration:(CGFloat)duration
-
-{
+-(void)animateLinesWithColor:(CGColorRef)lineColor andLineWidth:(CGFloat)lineWidth startPoint:(CGPoint)startFromPoint rollToStroke:(CGFloat)rollToStroke curveControlPoints:(NSArray<LinesCurvePoints*>*)curvePoints animationDuration:(CGFloat)duration{
     CAShapeLayer* layer = objc_getAssociatedObject(self, LAYER_PRO_NAME);
-    if(layer)
-    {
+    if(layer){
         [layer removeFromSuperlayer];
         objc_setAssociatedObject(self,  LAYER_PRO_NAME, nil, OBJC_ASSOCIATION_RETAIN);
     }
@@ -57,16 +53,14 @@ static const char * const LAYER_PRO_NAME = "ANIMATED_LINE_LAYER";
     
     BOOL isRounded = radius>0;
     
-    if(isRounded)
-    {
+    if(isRounded){
         zeroPoint.x = bounds.origin.x+radius;
     }
     
     [path moveToPoint:startFromPoint];
     
     long c = curvePoints.count;
-    for (long i =1; i<=c; i++)
-    {
+    for (long i =1; i<=c; i++){
         float nX = startFromPoint.x + (zeroPoint.x - startFromPoint.x)/(c)*i;
         float nY = startFromPoint.y +(zeroPoint.y - startFromPoint.y)/(c)*i;
         
@@ -81,46 +75,38 @@ static const char * const LAYER_PRO_NAME = "ANIMATED_LINE_LAYER";
     [path moveToPoint:zeroPoint];
     
     CGPoint nextPoint = CGPointMake(bounds.size.width, 0);
-    if(isRounded)
-    {
+    if(isRounded){
         nextPoint.x-=radius;
     }
     [path addLineToPoint:nextPoint];
-    if(isRounded)
-    {
+    if(isRounded){
         [path addArcWithCenter:CGPointMake(nextPoint.x, nextPoint.y+radius) radius:radius startAngle:-M_PI_2 endAngle:0 clockwise:YES];
     }
     
     nextPoint = CGPointMake(bounds.size.width, bounds.size.height);
-    if(isRounded)
-    {
+    if(isRounded){
         nextPoint.y-=radius;
     }
     [path addLineToPoint:nextPoint];
-    if (isRounded)
-    {
+    if (isRounded){
         [path addArcWithCenter:CGPointMake(nextPoint.x-radius, nextPoint.y) radius:radius startAngle:0 endAngle:M_PI_2 clockwise:YES];
     }
     
     nextPoint = CGPointMake(0, bounds.size.height);
-    if(isRounded)
-    {
+    if(isRounded){
         nextPoint.x +=radius;
     }
     [path addLineToPoint:nextPoint];
-    if (isRounded)
-    {
+    if (isRounded){
         [path addArcWithCenter:CGPointMake(nextPoint.x, nextPoint.y-radius) radius:radius startAngle:M_PI_2 endAngle:M_PI clockwise:YES];
     }
     
     nextPoint = CGPointMake(0, 0);
-    if(isRounded)
-    {
+    if(isRounded){
         nextPoint.y +=radius;
     }
     [path addLineToPoint:nextPoint];
-    if (isRounded)
-    {
+    if (isRounded){
         [path addArcWithCenter:CGPointMake(nextPoint.x+radius, nextPoint.y) radius:radius startAngle:M_PI endAngle:-M_PI_2 clockwise:YES];
     }
     

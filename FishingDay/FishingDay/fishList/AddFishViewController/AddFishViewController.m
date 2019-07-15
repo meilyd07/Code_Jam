@@ -21,6 +21,7 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
 @property (strong, nonatomic) IBOutlet UILabel *urlLabel;
 @property (strong, nonatomic) IBOutlet UITextField *urrTextField;
 @property (strong, nonatomic) IBOutlet UIButton *saveBtn;
+@property (strong, nonatomic) IBOutlet UITextView *descriptionTextvVew;
 
 
 @end
@@ -36,6 +37,7 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
         self.minTempTextField.text = [self.fish.minTemperature stringValue];
          self.maxTempTextField.text = [self.fish.maxTemperature stringValue];
         self.urrTextField.text = self.fish.imageUrl;
+        self.descriptionTextvVew.text = self.fish.descriptionFish;
     }
     else {
         self.fish = [FishModel new];
@@ -50,24 +52,21 @@ NSString * const fishChangedNotification = @"fishChangedNotification";
 - (void)onSaveButton {
     self.fish.nameFish = self.nameTextfield.text;
     self.fish.minTemperature = [NSNumber numberWithFloat: [self.minTempTextField.text floatValue]];
-    self.fish.minTemperature = [NSNumber numberWithFloat: [self.minTempTextField.text floatValue]];
+    self.fish.maxTemperature = [NSNumber numberWithFloat: [self.maxTempTextField.text floatValue]];
     self.fish.imageUrl=self.urrTextField.text;
+    self.fish.descriptionFish = self.descriptionTextvVew.text;
     [[NSNotificationCenter defaultCenter] postNotificationName:fishChangedNotification object:self];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 200, 200)];
-    //view.backgroundColor = [UIColor whiteColor];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2-100, self.view.frame.size.height/2-100, 200, 200)];
     UIGraphicsBeginImageContext(view.frame.size);
     [[UIImage imageNamed:@"save2"] drawInRect:view.bounds];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     view.backgroundColor = [UIColor colorWithPatternImage:image];
-    //UIImage *img = [UIImage imageNamed:@"save"];
     
     [self.view addSubview:view];
-    
-
-    [view animateLinesWithColor:[UIColor redColor].CGColor andLineWidth:8 startPoint:CGPointMake(100, -200) rollToStroke:0.25
+    [view animateLinesWithColor:[UIColor blueColor].CGColor andLineWidth:8 startPoint:CGPointMake(  0+view.frame.origin.y-self.saveBtn.frame.origin.y,0-view.frame.origin.x-self.saveBtn.frame.origin.x) rollToStroke:0.3
                curveControlPoints:@[[LinesCurvePoints curvePoints:CGPointMake(-50, -2) point2:CGPointMake(60, 5)],[LinesCurvePoints curvePoints:CGPointMake(-60, 10) point2:CGPointMake(100, 5)]] animationDuration:1];
     [UIView animateWithDuration:2.0 animations:^{
          view.alpha = 0.0;

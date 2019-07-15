@@ -21,6 +21,7 @@ extern NSString * const fishesDataKey;
 
 @property(strong,nonatomic) NSNumber *minTemperature;
 @property(strong,nonatomic) NSNumber *maxTemperature;
+@property(strong,nonatomic) NSString *descriptionFish;
 @end
 
 NS_ASSUME_NONNULL_END

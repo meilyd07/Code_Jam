@@ -11,7 +11,6 @@
 		32A15D6822D9EAFA00BF8544 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32A15D6722D9EAFA00BF8544 /* CoreLocation.framework */; };
 		5E0CBE3222DA44DC00DC17FD /* FishListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0CBE3122DA44DC00DC17FD /* FishListViewController.m */; };
 		5E0CBE3522DA452D00DC17FD /* FishTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0CBE3422DA452D00DC17FD /* FishTableViewCell.m */; };
-		5E0CBE3822DA458A00DC17FD /* FishInfoViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E0CBE3722DA458A00DC17FD /* FishInfoViewController1.m */; };
 		5E380D4122DA589F00F39B51 /* FishModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E380D4022DA589F00F39B51 /* FishModel.m */; };
 		5E380D4622DB605000F39B51 /* AddFishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E380D4422DB605000F39B51 /* AddFishViewController.m */; };
 		5E380D4722DB605000F39B51 /* AddFishViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E380D4522DB605000F39B51 /* AddFishViewController.xib */; };
@@ -28,7 +27,6 @@
 		6A75CC8822DAB2F500F45D45 /* WeatherDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A75CC8722DAB2F500F45D45 /* WeatherDetailViewModel.m */; };
 		6AB238D322D92D0E00568D89 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238D222D92D0E00568D89 /* AppDelegate.m */; };
 		6AB238DB22D92D0F00568D89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AB238DA22D92D0F00568D89 /* Assets.xcassets */; };
-
 		6AB238DE22D92D0F00568D89 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AB238DC22D92D0F00568D89 /* LaunchScreen.storyboard */; };
 		6AB238E122D92D0F00568D89 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238E022D92D0F00568D89 /* main.m */; };
 		6AB238E922D92FAE00568D89 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB238E822D92FAE00568D89 /* MapViewController.m */; };
@@ -52,8 +50,6 @@
 		5E0CBE3122DA44DC00DC17FD /* FishListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishListViewController.m; sourceTree = "<group>"; };
 		5E0CBE3322DA452D00DC17FD /* FishTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FishTableViewCell.h; sourceTree = "<group>"; };
 		5E0CBE3422DA452D00DC17FD /* FishTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishTableViewCell.m; sourceTree = "<group>"; };
-		5E0CBE3622DA458A00DC17FD /* FishInfoViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FishInfoViewController1.h; sourceTree = "<group>"; };
-		5E0CBE3722DA458A00DC17FD /* FishInfoViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishInfoViewController1.m; sourceTree = "<group>"; };
 		5E380D3F22DA589F00F39B51 /* FishModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FishModel.h; sourceTree = "<group>"; };
 		5E380D4022DA589F00F39B51 /* FishModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FishModel.m; sourceTree = "<group>"; };
 		5E380D4322DB605000F39B51 /* AddFishViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFishViewController.h; sourceTree = "<group>"; };
@@ -82,7 +78,6 @@
 		6AB238D122D92D0E00568D89 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AB238D222D92D0E00568D89 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6AB238DA22D92D0F00568D89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-
 		6AB238DD22D92D0F00568D89 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6AB238DF22D92D0F00568D89 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AB238E022D92D0F00568D89 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -236,7 +231,6 @@
 				6AB238D122D92D0E00568D89 /* AppDelegate.h */,
 				6AB238D222D92D0E00568D89 /* AppDelegate.m */,
 				6AB238DA22D92D0F00568D89 /* Assets.xcassets */,
-
 				6AB238DC22D92D0F00568D89 /* LaunchScreen.storyboard */,
 				6AB238DF22D92D0F00568D89 /* Info.plist */,
 				6AB238E022D92D0F00568D89 /* main.m */,
@@ -273,12 +267,10 @@
 			isa = PBXGroup;
 			children = (
 				5EF817CB22DBEA4F00C2ABDB /* animation */,
+				5EF817C822DBE9D700C2ABDB /* FishListViewController */,
 				5EF817CA22DBEA2600C2ABDB /* FishInfoViewController */,
 				5EF817C922DBE9FA00C2ABDB /* FishTableViewCell */,
-				5EF817C822DBE9D700C2ABDB /* FishListViewController */,
 				5EF817C722DBE9B300C2ABDB /* AddFishViewController */,
-				5E0CBE3622DA458A00DC17FD /* FishInfoViewController1.h */,
-				5E0CBE3722DA458A00DC17FD /* FishInfoViewController1.m */,
 				5E380D3F22DA589F00F39B51 /* FishModel.h */,
 				5E380D4022DA589F00F39B51 /* FishModel.m */,
 			);
@@ -405,7 +397,6 @@
 				5E380D4722DB605000F39B51 /* AddFishViewController.xib in Resources */,
 				E37855BB22DA07AE003114FD /* MarkViewController.xib in Resources */,
 				6AB238DB22D92D0F00568D89 /* Assets.xcassets in Resources */,
-
 				E37855AE22D9E13F003114FD /* MarkTableViewCell.xib in Resources */,
 				5E380D4D22DB8F5E00F39B51 /* FishInfoViewController.xib in Resources */,
 			);
@@ -424,7 +415,6 @@
 				E37855AD22D9E13F003114FD /* MarkTableViewCell.m in Sources */,
 				5E380D4C22DB8F5E00F39B51 /* FishInfoViewController.m in Sources */,
 				6AB238F222D92FF400568D89 /* MarksListViewController.m in Sources */,
-				5E0CBE3822DA458A00DC17FD /* FishInfoViewController1.m in Sources */,
 				6AB238D322D92D0E00568D89 /* AppDelegate.m in Sources */,
 				5E0CBE3522DA452D00DC17FD /* FishTableViewCell.m in Sources */,
 				6A75CC8122DAAF4200F45D45 /* WeatherDetailViewController.m in Sources */,

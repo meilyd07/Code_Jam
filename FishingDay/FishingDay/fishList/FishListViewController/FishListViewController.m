@@ -8,7 +8,6 @@
 
 #import "FishListViewController.h"
 #import "FishTableViewCell.h"
-#import "FishInfoViewController1.h"
 #import "FishInfoViewController.h"
 #import "FishModel.h"
 #import "AddFishViewController.h"
@@ -19,14 +18,14 @@ NSString * const key1 = @"image";
 NSString * const key2 = @"isImageLoaded";
 NSString * const cellReuseId = @"cellReuseId";
 
-@interface FishListViewController () <UITableViewDelegate, UITableViewDataSource, FishTableViewCellDelegate>
+@interface FishListViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) UITableView *fishesTableView;
 
 @property(strong,nonatomic) NSMutableArray *fishesArr;
 @property(strong,nonatomic) NSArray *fishesAr;
 
-@property (copy, nonatomic) NSArray *imageURLs;
+//@property (copy, nonatomic) NSArray *imageURLs;
 @property (strong, nonatomic) NSCache *imageCache;
 
 
@@ -37,10 +36,48 @@ NSString * const cellReuseId = @"cellReuseId";
 @implementation FishListViewController
 
 #pragma mark - Lifecycle
+-(instancetype)init{
+    if(self){
+      NSData *marksData = [[NSUserDefaults standardUserDefaults] objectForKey:fishesDataKey];
+        if (!marksData) {
+           
+            NSArray *imageUrls = @[@"http://fishingclub.by/templates/Pisces/images/fish_book/belij_amur.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/422.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/6.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/2.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/167.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/195.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/259.jpg", @"http://lookw.ru/1/519/1402242484-064.jpg"];
+            
+            NSArray *namesOfFishes =@[@"рыба1", @"рыба2", @"рыба3", @"рыба4", @"рыба5", @"рыба6", @"рыба7", @"рыба8"];
+            NSString *str =@"feieiofjneoinfeoifneoifneoifnjeoijfeoijfeoijfoejfeoijfeoifjeofjeoifjeoifjeoifjirnjrenfjenfeinfeinfeiojfehgwephguwehgpehgoheoihgoeigheogheowhrowhwoinvcoweinhfoierhg[weohgwe[ohnq'ihwpeorghwe[goihwe[ihgrwe[goihwg[wihgw[gihw[ihg[wihgw[ighw[whgwghwg";
+            
+            NSMutableArray *arr = [NSMutableArray new];
+            for(int i =0;i<namesOfFishes.count;i++){
+                FishModel *model = [FishModel new];
+                model.idFish= [NSNumber numberWithInt:i];
+                model.imageUrl=imageUrls[i];
+                model.nameFish = namesOfFishes[i];
+                model.descriptionFish=str;
+                [arr addObject:model];
+            }
+            NSData *fishesData = [NSKeyedArchiver archivedDataWithRootObject:arr requiringSecureCoding:NO error:nil];
+            [[NSUserDefaults standardUserDefaults] setObject:fishesData forKey:fishesDataKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            NSData *marksDataa = [[NSUserDefaults standardUserDefaults] objectForKey:fishesDataKey];
+            NSSet *classes = [NSSet setWithObjects:[NSArray class], [FishModel class], nil];
+            NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:marksDataa error:nil];
+            
+            self.fishesAr = decodedMarks;
+        } else {
+            NSData *marksDataa = [[NSUserDefaults standardUserDefaults] objectForKey:fishesDataKey];
+            NSSet *classes = [NSSet setWithObjects:[NSArray class], [FishModel class], nil];
+            NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:marksDataa error:nil];
+            
+            self.fishesAr = decodedMarks;
+        }
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.backgroundColor = [UIColor redColor];
+    self.navigationController.navigationBar.backgroundColor = [UIColor blueColor];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"Fishes";
    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -48,25 +85,7 @@ NSString * const cellReuseId = @"cellReuseId";
     self.navigationItem.rightBarButtonItem = addButton;
     
     self.imageCache = [NSCache new];
-    self.imageURLs = @[@"http://fishingclub.by/templates/Pisces/images/fish_book/belij_amur.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/422.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/6.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/2.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/167.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/195.jpg", @"http://fishingclub.by/templates/Pisces/images/fish_book/259.jpg", @"http://lookw.ru/1/519/1402242484-064.jpg"];
     
-    NSArray *namesOfFishes =@[@"рыба1", @"рыба2", @"рыба3", @"рыба4", @"рыба5", @"рыба6", @"рыба7", @"рыба8"];
-    self.fishesArr = [NSMutableArray new];
-    for(int i =0;i<namesOfFishes.count;i++){
-        FishModel *model = [FishModel new];
-        model.imageUrl=self.imageURLs[i];
-        model.nameFish = namesOfFishes[i];
-        [self.fishesArr addObject:model];
-    }
-    NSData *fishesData = [NSKeyedArchiver archivedDataWithRootObject:self.fishesArr requiringSecureCoding:NO error:nil];
-    [[NSUserDefaults standardUserDefaults] setObject:fishesData forKey:fishesDataKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    NSData *marksDataa = [[NSUserDefaults standardUserDefaults] objectForKey:fishesDataKey];
-    NSSet *classes = [NSSet setWithObjects:[NSArray class], [FishModel class], nil];
-    NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:marksDataa error:nil];
-    
-    self.fishesAr = decodedMarks;
     
     [self setupTableView];
 }
@@ -149,12 +168,11 @@ NSString * const cellReuseId = @"cellReuseId";
     return self.fishesAr.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70.0;
+    return 80.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FishTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReuseId forIndexPath:indexPath];
-    cell.delegate = self;
     FishModel *model = self.fishesAr[indexPath.row];
     NSString *imageURL = model.imageUrl;
     cell.imageUrlName = imageURL;
@@ -185,36 +203,22 @@ NSString * const cellReuseId = @"cellReuseId";
     [self.navigationController pushViewController:imageVC animated:YES];
 }
 
-- (void)didTapOnImageViewInCell:(FishTableViewCell *)cell {
-    NSIndexPath *indexPath = [self.fishesTableView indexPathForCell:cell];
-    FishModel *model = self.fishesAr[indexPath.row];
-    NSString *imageURL = model.imageUrl;
-    FishInfoViewController1 *imageVC = [FishInfoViewController1 new];
-    imageVC.imageURL = imageURL;
-    imageVC.fish = model;
-    UIImage *image = [self.imageCache objectForKey:imageURL];
-    if (image) {
-        imageVC.image = image;
-    }
-    
-    
-    self.tappedRowIndexPath = indexPath;
-    [self.navigationController pushViewController:imageVC animated:YES];
-}
+
 
 - (void)fishChanged:(NSNotification *)notification {
-    AddFishViewController *markVC = notification.object;
-    NSInteger row = markVC.row;
+    AddFishViewController *fishVC = notification.object;
+    NSInteger row = fishVC.row;
     FishModel *fish;
     if (row == self.fishesAr.count) { // create mark
         fish = [FishModel new];
-        NSMutableArray *marks = [self mutableArrayValueForKey:@"fishesAr"];
-        fish.nameFish = markVC.fish.nameFish;
-        fish.maxTemperature= markVC.fish.maxTemperature;
-        fish.minTemperature = markVC.fish.minTemperature;
-        [marks addObject:fish];
+        NSMutableArray *fishes = [self mutableArrayValueForKey:@"fishesAr"];
+        fish.idFish = [NSNumber numberWithInt: fishes.count];
+        fish.nameFish = fishVC.fish.nameFish;
+        fish.maxTemperature= fishVC.fish.maxTemperature;
+        fish.minTemperature = fishVC.fish.minTemperature;
+        fish.descriptionFish = fishVC.fish.descriptionFish;
+        [fishes addObject:fish];
         
-          // mark.title = markVC.mark.title;
     } else { // update mark
         fish = self.fishesAr[row];
     }
@@ -240,7 +244,6 @@ NSString * const cellReuseId = @"cellReuseId";
     }];
     UIContextualAction *delete = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"delete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
         NSMutableArray *marks = [self mutableArrayValueForKey:@"fishesAr"];
-        FishModel *model = self.fishesAr[indexPath.row];
         [marks removeObjectAtIndex:indexPath.row];
         [tableView reloadData];
         [self saveData];

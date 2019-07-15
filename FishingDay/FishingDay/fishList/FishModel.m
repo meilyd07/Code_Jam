@@ -22,6 +22,7 @@ NSString * const fishesDataKey = @"fishesDataKey";
     self.imageUrl = [coder decodeObjectOfClass:[NSString class] forKey:@"imageUrl"];
     self.minTemperature = [coder decodeObjectOfClass:[NSNumber class] forKey:@"minTemperature"];
      self.maxTemperature = [coder decodeObjectOfClass:[NSNumber class] forKey:@"maxTemperature"];
+    self.descriptionFish = [coder decodeObjectOfClass:[NSNumber class] forKey:@"descriptionFish"];
     return self;
 }
 
@@ -32,6 +33,7 @@ NSString * const fishesDataKey = @"fishesDataKey";
     [coder encodeObject:self.imageUrl forKey:@"imageUrl"];
      [coder encodeObject:self.minTemperature forKey:@"minTemperature"];
      [coder encodeObject:self.maxTemperature forKey:@"maxTemperature"];
+    [coder encodeObject:self.descriptionFish forKey:@"descriptionFish"];
 }
 
 + (BOOL)supportsSecureCoding {
