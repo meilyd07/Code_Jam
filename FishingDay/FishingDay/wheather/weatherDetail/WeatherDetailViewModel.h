@@ -10,7 +10,6 @@
 #import "Mark.h"
 
 @interface WeatherDetailViewModel : NSObject
-@property (strong, nonatomic) Mark *mark;
 - (id)initWithMark:(Mark *)mark;
 -(NSString *)getWindDirectionValue;
 -(NSString *)getWindSpeedValue;
