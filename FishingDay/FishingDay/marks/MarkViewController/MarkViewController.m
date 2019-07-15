@@ -91,7 +91,7 @@ NSString * const markAnnotationReuseId = @"markAnnotationReuseId";
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 200, 200)];
     UIGraphicsBeginImageContext(view.frame.size);
-    [[UIImage imageNamed:@"saveIcon"] drawInRect:view.bounds];
+    [[UIImage imageNamed:@"save2"] drawInRect:view.bounds];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     view.backgroundColor = [UIColor colorWithPatternImage:image];
@@ -105,7 +105,7 @@ NSString * const markAnnotationReuseId = @"markAnnotationReuseId";
     self.mark.title = self.titleTextField.text;
     self.mark.details = self.pickerTextField.text;
     self.mark.photo = self.photoImageView.image;
-    self.mark.fishId = self.selectedFishTypes;
+    self.mark.fishId = self.selectedFishTypes.count == 0 ? nil : self.selectedFishTypes;
     [[NSNotificationCenter defaultCenter] postNotificationName:markChangedNotification object:self];
     [self.navigationController popViewControllerAnimated:YES];
     
