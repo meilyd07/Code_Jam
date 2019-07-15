@@ -31,7 +31,6 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
                                                                                        @(tempMin),
                                                                                        @(pressure),
                                                                                        @(humidity),
-                                                                                       @(windSpeed),
                                                                                        @(windSpeed)
                                                                                        ]],
                               [[WeatherSection alloc] init: temperatureSection items:@[
@@ -40,7 +39,6 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
                                                                                        @(tempMin),
                                                                                        @(pressure),
                                                                                        @(humidity),
-                                                                                       @(windSpeed),
                                                                                        @(windSpeed)
                                                                                        ]],
                               [[WeatherSection alloc] init: temperatureSection items:@[
@@ -49,7 +47,6 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
                                                                                        @(tempMin),
                                                                                        @(pressure),
                                                                                        @(humidity),
-                                                                                       @(windSpeed),
                                                                                        @(windSpeed)
                                                                                        ]],
                               [[WeatherSection alloc] init: temperatureSection items:@[
@@ -58,7 +55,6 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
                                                                                        @(tempMin),
                                                                                        @(pressure),
                                                                                        @(humidity),
-                                                                                       @(windSpeed),
                                                                                        @(windSpeed)
                                                                                        ]],
                               [[WeatherSection alloc] init: temperatureSection items:@[
@@ -67,7 +63,6 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
                                                                                        @(tempMin),
                                                                                        @(pressure),
                                                                                        @(humidity),
-                                                                                       @(windSpeed),
                                                                                        @(windSpeed)
                                                                                        ]],
                               [[WeatherSection alloc] init: temperatureSection items:@[
@@ -76,7 +71,6 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
                                                                                        @(tempMin),
                                                                                        @(pressure),
                                                                                        @(humidity),
-                                                                                       @(windSpeed),
                                                                                        @(windSpeed)
                                                                                        ]],
                               [[WeatherSection alloc] init: temperatureSection items:@[
@@ -85,7 +79,6 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
                                                                                        @(tempMin),
                                                                                        @(pressure),
                                                                                        @(humidity),
-                                                                                       @(windSpeed),
                                                                                        @(windSpeed)
                                                                                        ]],
                               
@@ -95,7 +88,6 @@ static NSString *TableViewCellIdentifier = @"LocationMarkCell";
                                                                                        @(tempMin),
                                                                                        @(pressure),
                                                                                        @(humidity),
-                                                                                       @(windSpeed),
                                                                                        @(windSpeed)
                                                                                        ]]
                               ];
