@@ -11,6 +11,7 @@
 #import <AVKit/AVKit.h>
 #import <Photos/Photos.h>
 #import "UIView+AnimatedLines.h"
+#import "FishModel.h"
 
 NSString * const markChangedNotification = @"markChangedNotification";
 NSString * const markAnnotationReuseId = @"markAnnotationReuseId";
@@ -154,9 +155,11 @@ NSString * const markAnnotationReuseId = @"markAnnotationReuseId";
 
 - (void)fetchFishTypes {
     self.fishTypes = [NSMutableDictionary dictionary];
-    //TODO: fetch from user defaults
-    for (int i = 1; i < 7; i++) {
-        [self.fishTypes setObject:[NSString stringWithFormat:@"fish %d", i] forKey:@(i)];
+    NSData *fishData = [[NSUserDefaults standardUserDefaults] objectForKey:fishesDataKey];
+    NSSet *classes = [NSSet setWithObjects:[NSArray class], [FishModel class], nil];
+    NSArray *decodedFishInfo = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:fishData error:nil];
+    for (FishModel *fish in decodedFishInfo) {
+        [self.fishTypes addEntriesFromDictionary:@{fish.idFish: fish.nameFish}];
     }
     self.keysForTypes = self.fishTypes.allKeys;
 }
