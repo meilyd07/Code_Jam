@@ -15,7 +15,6 @@
 @interface MapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, UIGestureRecognizerDelegate>
 @property(strong, nonatomic) MKMapView *mapView;
 @property(strong, nonatomic) NSMutableArray *marks;
-@property(strong, nonatomic) NSMutableArray *fishesList;
 
 @property(strong, nonatomic) CLLocationManager *locationManager;
 @end
@@ -32,16 +31,6 @@ NSString * const annotationReuseId = @"annotation";
     [self initLocationManager];
     [self initMap];
     [self initMarksWithSubscription];
-    
-    NSData *fishesData = [[NSUserDefaults standardUserDefaults] objectForKey:fishesDataKey];
-    
-    if (fishesData) {
-        NSSet *classes = [NSSet setWithObjects:[NSArray class], [FishModel class], nil];
-        NSArray *decodedMarks = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:fishesData error:nil];
-        self.fishesList = [decodedMarks mutableCopy];
-    } else {
-        self.fishesList = [NSMutableArray array];
-    }
     
     if ([CLLocationManager locationServicesEnabled]){
         CLAuthorizationStatus permissionStatus = [CLLocationManager authorizationStatus];
