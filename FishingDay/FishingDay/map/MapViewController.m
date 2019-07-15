@@ -178,7 +178,7 @@ NSString * const annotationReuseId = @"annotation";
             }
             
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Do you want to delete this Mark?"
-                                                                           message:[NSString stringWithFormat:@"Title: %@ \n Details: %@", mark.title, mark.details]
+                                                                           message:[NSString stringWithFormat:@"Title: %@", mark.title]
                                                                     preferredStyle:UIAlertControllerStyleAlert];
 
             NSMutableArray __weak *marks = self.marks;
@@ -212,8 +212,8 @@ NSString * const annotationReuseId = @"annotation";
     } else {
         CLLocationCoordinate2D coordingate = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add Mark"
-                                                                       message:@"Write title and details: "
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Add mark with Title: "
+                                                                       message:nil
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
         NSMutableArray __weak *marks = self.marks;
@@ -225,7 +225,6 @@ NSString * const annotationReuseId = @"annotation";
                                                        
                                                        Mark *mark = [[Mark alloc] init];
                                                        mark.title = alert.textFields[0].text;
-                                                       mark.details = alert.textFields[1].text;
                                                        mark.location = coordingate;
                                                        
                                                        [marks addObject:mark]; // Do I Really need safe?
@@ -237,11 +236,6 @@ NSString * const annotationReuseId = @"annotation";
         
         [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
             textField.placeholder = @"Title";
-            textField.keyboardType = UIKeyboardTypeDefault;
-        }];
-        
-        [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            textField.placeholder = @"Details";
             textField.keyboardType = UIKeyboardTypeDefault;
         }];
         
@@ -287,7 +281,6 @@ NSString * const annotationReuseId = @"annotation";
 
 - (BOOL)isAnnotation:(MKPointAnnotation *)annotation equalToMark:(Mark *)mark {
     if ([self isCoordinate:mark.location equalTo:annotation.coordinate]
-        && [mark.details isEqualToString:annotation.subtitle]
         && [mark.title isEqualToString:annotation.title])
     {
         return YES;
